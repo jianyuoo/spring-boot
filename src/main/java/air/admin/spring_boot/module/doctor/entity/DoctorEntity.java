@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 
 import java.io.Serializable;
 
-@TableName(value = "doctor")
+@TableName(value = "doctor_user")
 public class DoctorEntity implements Serializable {
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;

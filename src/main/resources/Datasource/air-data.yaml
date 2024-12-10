@@ -32,7 +32,3 @@ spring:
       min-idle: 1
       max-idle: 3
       max-wait: 30000ms
-
-  # 缓存实现类型
-  cache:
-    type: redis
