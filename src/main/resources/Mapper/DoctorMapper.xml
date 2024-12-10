@@ -3,5 +3,19 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="air.admin.spring_boot.module.doctor.mapper.DoctorMapper">
-
+    <select id="page" resultType="air.admin.spring_boot.module.doctor.dto.DoctorResultDto">
+        SELECT
+            *
+        FROM base_doctor
+        WHERE 1=1
+        <if test="param.doctorId!=null and param.doctorId='' ">
+            AND doctorId = #{param.doctorId}
+        </if>
+        <if test="param.doctorName!=null and param.doctorName='' ">
+            AND doctorName = #{param.doctorName}
+        </if>
+        <if test="param.doctorDepartment!=null and param.doctorDepartment='' ">
+            AND doctorDepartment = #{param.doctorDepartment}
+        </if>
+    </select>
 </mapper>

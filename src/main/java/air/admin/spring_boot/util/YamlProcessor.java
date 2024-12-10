@@ -22,7 +22,6 @@ import java.util.List;
  *
  */
 @Configuration
-@Slf4j
 @Order(value = 0)
 public class YamlProcessor implements EnvironmentPostProcessor {
 
@@ -32,10 +31,6 @@ public class YamlProcessor implements EnvironmentPostProcessor {
     @Override
     public void postProcessEnvironment(ConfigurableEnvironment environment, SpringApplication application) {
         String filePath = environment.getProperty("project.log-path");
-        if (SmartStringUtil.isNotEmpty(filePath)) {
-            System.setProperty("project.log-path", filePath);
-        }
-
         MutablePropertySources propertySources = environment.getPropertySources();
         this.loadProperty(propertySources);
     }
