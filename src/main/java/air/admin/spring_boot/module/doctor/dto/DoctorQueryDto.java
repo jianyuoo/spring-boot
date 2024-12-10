@@ -1,4 +1,8 @@
 package air.admin.spring_boot.module.doctor.dto;
 
-public class DoctorQueryDto {
+import air.admin.spring_boot.util.PageParam;
+import lombok.Data;
+
+@Data
+public class DoctorQueryDto extends PageParam {
 }
