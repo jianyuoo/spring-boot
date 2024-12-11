@@ -26,6 +26,7 @@ import java.util.List;
 @RestController
 @RequestMapping("v2/people")
 public class PeopleController {
+
     @Resource
     private PeopleService peopleService;
 

@@ -44,5 +44,4 @@ public class LoginController {
         SystemUserInfoVo userInfo = loginService.getLoginUserInfo(LoginUserHolder.getLoginUser().getUserId()); // 从上下文获取当前用户ID
         return ResponseDTO.ok(userInfo); // 返回成功的响应
     }
-
 }
