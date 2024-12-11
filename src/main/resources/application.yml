@@ -4,7 +4,13 @@ spring:
     username: postgres
     password: z@king.com@123
     driver-class-name: org.postgresql.Driver
+  data:
+    redis:
+      host: 192.168.2.175
+      port: 6379
+      database: 0
 mybatis-plus:
   mapper-locations: classpath:/mapper/**/*.xml
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+

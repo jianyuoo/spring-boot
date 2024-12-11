@@ -4,7 +4,8 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="air.admin.spring_boot.module.doctor.mapper.DoctorMapper">
     <sql id="col">
-
+        doctor_id,doctor_age,doctor_sex,doctor_department_id,
+        doctor_department,doctor_job_title,doctor_name
     </sql>
     <select id="page" resultType="air.admin.spring_boot.module.doctor.dto.DoctorResultDto">
         SELECT
