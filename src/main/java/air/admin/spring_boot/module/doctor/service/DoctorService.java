@@ -3,18 +3,20 @@ package air.admin.spring_boot.module.doctor.service;
 import air.admin.spring_boot.module.doctor.dto.DoctorQueryDto;
 import air.admin.spring_boot.module.doctor.dto.DoctorResultDto;
 import air.admin.spring_boot.module.doctor.entity.DoctorEntity;
+import air.admin.spring_boot.module.doctor.mapper.DoctorMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.extension.service.IService;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.springframework.stereotype.Service;
 
-public interface DoctorService extends IService<DoctorEntity> {
+@Service
+public class DoctorService extends ServiceImpl<DoctorMapper, DoctorEntity> {
 
-    /**
-     * @param page
-     * @param query
-     * @return
-     */
-    IPage<DoctorResultDto> page(IPage<DoctorResultDto> page, DoctorQueryDto query);
+    public IPage<DoctorResultDto> page(IPage<DoctorResultDto> page, DoctorQueryDto query) {
+        return this.baseMapper.page(page, query);
+    }
 
-    int insert(DoctorEntity doctor);
+    public int insert(DoctorEntity doctor) {
+        return this.baseMapper.insert(doctor);
+    }
 
 }

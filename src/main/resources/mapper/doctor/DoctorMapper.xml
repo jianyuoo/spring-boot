@@ -8,7 +8,7 @@
     </sql>
     <select id="page" resultType="air.admin.spring_boot.module.doctor.dto.DoctorResultDto">
         SELECT
-            *
+            <include refid="col"/>
         FROM base_doctor
         WHERE 1=1
         <if test="param.doctorId!=null and param.doctorId!='' ">
