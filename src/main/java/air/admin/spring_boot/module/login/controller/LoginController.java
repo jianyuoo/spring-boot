@@ -31,17 +31,18 @@ public class LoginController {
         return ResponseDTO.ok(token);
     }
 
-    @GetMapping("info")
-    public ResponseDTO<SystemUserInfoVo> info(@RequestHeader("access-token") String token) throws LeaseException {
-        Claims claims = JwtUtil.parseToken(token);
-        Long userId = claims.get("userId", Long.class);
-        SystemUserInfoVo userInfo = loginService.getLoginUserInfo(userId);
-        return ResponseDTO.ok(userInfo);
+    @GetMapping("info/token")
+    public ResponseDTO<SystemUserInfoVo> infoWithToken(@RequestHeader("access-token") String token) throws LeaseException {
+        Claims claims = JwtUtil.parseToken(token); // 解析JWT，获取声明
+        Long userId = claims.get("userId", Long.class); // 从声明中获取用户ID
+        SystemUserInfoVo userInfo = loginService.getLoginUserInfo(userId); // 获取用户信息
+        return ResponseDTO.ok(userInfo); // 返回成功的响应
     }
 
-    @GetMapping("info")
+    @GetMapping("info/current")
     public ResponseDTO<SystemUserInfoVo> info() {
-        SystemUserInfoVo userInfo = loginService.getLoginUserInfo(LoginUserHolder.getLoginUser().getUserId());
-        return ResponseDTO.ok(userInfo);
+        SystemUserInfoVo userInfo = loginService.getLoginUserInfo(LoginUserHolder.getLoginUser().getUserId()); // 从上下文获取当前用户ID
+        return ResponseDTO.ok(userInfo); // 返回成功的响应
     }
+
 }
