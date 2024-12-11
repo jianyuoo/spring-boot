@@ -14,11 +14,15 @@ import org.springframework.stereotype.Service;
 public class DoctorServiceImpl extends ServiceImpl<DoctorMapper, DoctorEntity>
         implements DoctorService {
 
-    @Resource
-    private DoctorMapper doctorMapper;
 
     @Override
     public IPage<DoctorResultDto> page(IPage<DoctorResultDto> page, DoctorQueryDto query) {
-        return doctorMapper.page(page, query);
+        return this.baseMapper.page(page, query);
     }
+
+    @Override
+    public int insert(DoctorEntity doctor) {
+        return this.baseMapper.insert(doctor);
+    }
+
 }

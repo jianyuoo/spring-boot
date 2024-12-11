@@ -11,8 +11,8 @@ import lombok.Data;
 
 import java.util.List;
 
+@Data
 public class PageParam {
-    @Schema(description = "页码(不能为空)", example = "1")
     @NotNull(message = "分页参数不能为空")
     private Long pageNum;
 

@@ -7,14 +7,13 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
-import org.springframework.stereotype.Component;
 
 @Mapper
-@Component
 public interface DoctorMapper extends BaseMapper<DoctorEntity> {
 
     /**
-     *  查询分页
-     *  */
-    IPage<DoctorResultDto> page(IPage<DoctorResultDto>page, @Param("param")DoctorQueryDto query);
+     * 查询分页
+     */
+    IPage<DoctorResultDto> page(IPage<DoctorResultDto> page, @Param("param") DoctorQueryDto query);
+
 }
