@@ -1,5 +1,6 @@
 package air.admin.spring_boot.module.login.controller;
 
+import air.admin.spring_boot.module.login.entity.SystemUserEntity;
 import air.admin.spring_boot.module.login.service.LoginService;
 import air.admin.spring_boot.module.login.vo.CaptchaVo;
 import air.admin.spring_boot.module.login.vo.LoginVo;
@@ -8,7 +9,7 @@ import air.admin.spring_boot.util.JwtUtil;
 import air.admin.spring_boot.util.LeaseException;
 import air.admin.spring_boot.util.common.LoginUserHolder;
 import air.admin.spring_boot.util.common.ResponseDTO;
-import cn.hutool.extra.tokenizer.Result;
+import air.admin.spring_boot.util.common.Result;
 import io.jsonwebtoken.Claims;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -24,7 +25,10 @@ public class LoginController {
         CaptchaVo captchaVo = loginService.getCaptcha();
         return ResponseDTO.ok(captchaVo);
     }
-
+    @PostMapping("/regist")
+    public Result regist(@RequestBody SystemUserEntity systemUser){
+        return loginService.regist(systemUser);
+    }
     @PostMapping("/login")
     public ResponseDTO<String> login(@RequestBody LoginVo loginVo) throws LeaseException {
         String token = loginService.login(loginVo);

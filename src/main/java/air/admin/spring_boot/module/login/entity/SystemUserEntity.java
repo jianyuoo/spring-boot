@@ -28,6 +28,6 @@ public class SystemUserEntity {
     @TableField(value = "status")
     private String status;
 
-    @TableField(value = "login_data")
-    private Date LoginData;
+//    @TableField(value = "login_data")
+//    private Date LoginData;
 }

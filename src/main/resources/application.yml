@@ -9,6 +9,9 @@ spring:
       host: 192.168.2.175
       port: 6379
       database: 0
+  web:
+    resources:
+      static-locations: classpath:/templates
 mybatis-plus:
   mapper-locations: classpath:/mapper/**/*.xml
   configuration:

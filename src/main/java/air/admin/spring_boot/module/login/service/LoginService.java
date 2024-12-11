@@ -7,6 +7,8 @@ import air.admin.spring_boot.module.login.vo.CaptchaVo;
 import air.admin.spring_boot.module.login.vo.LoginVo;
 import air.admin.spring_boot.module.login.vo.SystemUserInfoVo;
 import air.admin.spring_boot.util.LeaseException;
+import air.admin.spring_boot.util.common.ResponseDTO;
+import air.admin.spring_boot.util.common.Result;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.wf.captcha.SpecCaptcha;
 import com.wf.captcha.base.Captcha;
@@ -38,6 +40,31 @@ public class LoginService extends ServiceImpl<LoginMapper,SystemUserEntity> {
         redisTemplate.opsForValue().set(key, code, RedisConstant.ADMIN_LOGIN_CAPTCHA_TTL_SEC, TimeUnit.SECONDS);
 
         return new CaptchaVo(image, key);
+    }
+
+    public Result regist(SystemUserEntity systemUser) {
+        Result result = new Result();
+        result.setSuccess(false);
+        result.setDetail(null);
+
+        try {
+            SystemUserEntity existUser = this.baseMapper.findUserByName(systemUser.getUsername());
+            if(existUser != null){
+                //如果用户名已存在
+                result.setMsg("用户名已存在");
+
+            }else{
+                this.baseMapper.regist(systemUser);
+                //System.out.println(user.getId());
+                result.setMsg("注册成功");
+                result.setSuccess(true);
+                result.setDetail(systemUser);
+            }
+        } catch (Exception e) {
+            result.setMsg(e.getMessage());
+            e.printStackTrace();
+        }
+        return result;
     }
 
     public String login(LoginVo loginVo) throws LeaseException {

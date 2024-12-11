@@ -8,4 +8,8 @@ public interface LoginMapper extends BaseMapper<SystemUserEntity> {
     SystemUserEntity selectById(Long userId);
 
     SystemUserEntity selectOneByUsername(String username);
+
+    SystemUserEntity findUserByName(String username);
+
+    void regist(SystemUserEntity systemUser);
 }
