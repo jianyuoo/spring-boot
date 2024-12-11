@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="air.admin.spring_boot.module.login.mapper.LoginMapper">
+
+    <select id="selectOneByUsername" resultType="air.admin.spring_boot.module.login.entity.SystemUserEntity">
+        SELECT id,
+        username,
+        password,
+        name,
+        type,
+        phone,
+        avatar_url,
+        additional_info,
+        post_id,
+        status
+        FROM system_user
+        WHERE is_deleted = 0
+        AND username = #{username}
+</select>
+    <select id="selectById" resultType="air.admin.spring_boot.module.login.entity.SystemUserEntity">
+        SELECT id,
+               username,
+               password,
+               name,
+               type,
+               phone,
+               avatar_url,
+               additional_info,
+               post_id,
+               status
+        FROM system_user
+        WHERE is_deleted = 0
+          AND id = #{id}
+
+    </select>
+
+</mapper>
