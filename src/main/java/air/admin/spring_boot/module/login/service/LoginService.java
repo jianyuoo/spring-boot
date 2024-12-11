@@ -12,6 +12,7 @@ import air.admin.spring_boot.util.common.Result;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.wf.captcha.SpecCaptcha;
 import com.wf.captcha.base.Captcha;
+import jakarta.annotation.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
@@ -46,15 +47,13 @@ public class LoginService extends ServiceImpl<LoginMapper,SystemUserEntity> {
         Result result = new Result();
         result.setSuccess(false);
         result.setDetail(null);
-
         try {
-            SystemUserEntity existUser = this.baseMapper.findUserByName(systemUser.getUsername());
+            SystemUserEntity existUser = this.baseMapper.findUserByName(systemUser);
             if(existUser != null){
                 //如果用户名已存在
                 result.setMsg("用户名已存在");
-
             }else{
-                this.baseMapper.regist(systemUser);
+                this.baseMapper.insert(systemUser);
                 //System.out.println(user.getId());
                 result.setMsg("注册成功");
                 result.setSuccess(true);

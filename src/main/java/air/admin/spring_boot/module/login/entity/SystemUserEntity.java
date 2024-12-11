@@ -7,7 +7,7 @@ import lombok.Data;
 import java.util.Date;
 
 @Data
-@TableName(value = "system_user")
+@TableName(value = "users")
 public class SystemUserEntity {
 
     @TableField(value = "id")

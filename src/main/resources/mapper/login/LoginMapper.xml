@@ -12,11 +12,9 @@
         user_name,
         password,
         name,
-
         avatarurl,
-
         status
-        FROM system_user
+        FROM users
         WHERE 1=1
         AND user_name = #{username}
 </select>
@@ -27,17 +25,15 @@
                name,
                avatarurl,
                status
-        FROM system_user
+        FROM users
         WHERE 1=1
           AND id = #{id}
 
     </select>
     <select id="findUserByName" resultType="air.admin.spring_boot.module.login.entity.SystemUserEntity">
-        SELECT id,
-               user_name
-        FROM system_user
-        WHERE 1=1
-
+        SELECT user_name
+        FROM users
+        WHERE user_name = #{param.username}
     </select>
 
 </mapper>
