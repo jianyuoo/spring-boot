@@ -30,7 +30,7 @@ public class DoctorController {
     public ResponseDTO<String> add(@RequestBody DoctorSaveDto dto){
         DoctorEntity doctorEntity = new DoctorEntity();
         BeanUtils.copyProperties(dto, doctorEntity);
-        doctorService.insert(doctorEntity);
+        doctorService.save(doctorEntity);
         return ResponseDTO.ok();
     }
 

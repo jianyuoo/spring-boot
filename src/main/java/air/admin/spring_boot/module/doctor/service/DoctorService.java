@@ -15,8 +15,4 @@ public class DoctorService extends ServiceImpl<DoctorMapper, DoctorEntity> {
         return this.baseMapper.page(page, query);
     }
 
-    public int insert(DoctorEntity doctor) {
-        return this.baseMapper.insert(doctor);
-    }
-
 }
