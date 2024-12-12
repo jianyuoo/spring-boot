@@ -1,3 +1,5 @@
+package air.admin.spring_boot.util.common;
+
 //package air.admin.spring_boot.util.common;
 //
 //
@@ -14,7 +16,7 @@
 // */
 //@Getter
 //@Data
-//public class ResponseDTO<T> {
+public class ResponseDTO<T> {
 //    //current   size  records
 //    public static final int OK_CODE = 0;
 //
@@ -60,4 +62,4 @@
 //        }
 //    }
 //
-//}
+}
