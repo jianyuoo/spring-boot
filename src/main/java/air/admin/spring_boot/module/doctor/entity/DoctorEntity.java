@@ -1,6 +1,7 @@
 package air.admin.spring_boot.module.doctor.entity;
 
 import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
@@ -14,7 +15,6 @@ public class DoctorEntity implements Serializable {
     /**
      * 医生id
     **/
-    @TableField(value = "doctor_id")
     private Long doctorId;
 
     /**

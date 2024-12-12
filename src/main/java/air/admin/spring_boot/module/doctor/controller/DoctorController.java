@@ -36,9 +36,10 @@ public class DoctorController {
 
     @PostMapping("/select")
     @Transactional(rollbackFor = Exception.class)
-    public ResponseDTO<List<DoctorResultDto>> page(@Valid @RequestBody DoctorQueryDto queryParam){
-        IPage<DoctorResultDto> page = new Page<>(queryParam.getPageNum(),queryParam.getPageSize());
+    public ResponseDTO<IPage<DoctorResultDto>> page(@Valid @RequestBody DoctorQueryDto queryParam) {
+        IPage<DoctorResultDto> page = new Page<>(queryParam.getPageNum(), queryParam.getPageSize());
         page = doctorService.page(page, queryParam);
-        return ResponseDTO.ok(page.getRecords());
+        return ResponseDTO.ok(page);
     }
+
 }
