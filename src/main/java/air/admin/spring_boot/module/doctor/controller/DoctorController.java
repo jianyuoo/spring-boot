@@ -27,11 +27,11 @@ public class DoctorController {
      * */
     @PostMapping("/add")
     @Transactional(rollbackFor = Exception.class)
-    public ResponseDTO<String> add(@RequestBody DoctorSaveDto dto){
+    public ResponseDTO<DoctorEntity> add(@RequestBody DoctorSaveDto dto){
         DoctorEntity doctorEntity = new DoctorEntity();
         BeanUtils.copyProperties(dto, doctorEntity);
         doctorService.save(doctorEntity);
-        return ResponseDTO.ok();
+        return ResponseDTO.ok(doctorEntity);
     }
 
     @PostMapping("/select")

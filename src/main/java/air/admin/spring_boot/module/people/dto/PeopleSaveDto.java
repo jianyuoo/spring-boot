@@ -1,6 +1,8 @@
 package air.admin.spring_boot.module.people.dto;
 
 import com.baomidou.mybatisplus.annotation.TableField;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import lombok.Data;
 
 
@@ -9,16 +11,17 @@ public class PeopleSaveDto {
     /**
      * 病患信息保存
      */
-    @TableField(value = "id")
-    private int id;
-    @TableField(value = "name")
+    @TableField(value = "p_id")
+    @JsonSerialize(using = ToStringSerializer.class)
+    private Long id;
+    @TableField(value = "p_name")
     private String name;
-    @TableField(value = "age")
+    @TableField(value = "p_age")
     private int age;
-    @TableField(value = "gender")
+    @TableField(value = "p_gender")
     private String gender;
-    @TableField(value = "contact")
+    @TableField(value = "p_contact")
     private String contact;
-    @TableField(value = "address")
+    @TableField(value = "p_address")
     private String address;
 }

@@ -35,18 +35,18 @@ public class PeopleController {
      **/
     @PostMapping("/add")
     @Transactional(rollbackFor = Exception.class)
-    public ResponseDTO<String> add(@RequestBody PeopleSaveDto dto){
+    public ResponseDTO<PeopleEntity> add(@RequestBody PeopleSaveDto dto){
         PeopleEntity peopleEntity = new PeopleEntity();
         BeanUtils.copyProperties(dto, peopleEntity);
         peopleService.save(peopleEntity);
-        return ResponseDTO.ok();
+        return ResponseDTO.ok(peopleEntity);
     }
 
     @PostMapping("/select")
     @Transactional(rollbackFor = Exception.class)
-    public ResponseDTO<List<PeopleResultDto>> page(@Valid @RequestBody PeopleQueryDto queryParam){
+    public ResponseDTO<IPage<PeopleResultDto>> page(@Valid @RequestBody PeopleQueryDto queryParam){
         IPage<PeopleResultDto> page = new Page<>(queryParam.getPageNum(),queryParam.getPageSize());
         page = peopleService.page(page, queryParam);
-        return ResponseDTO.ok(page.getRecords());
+        return ResponseDTO.ok(page);
     }
 }

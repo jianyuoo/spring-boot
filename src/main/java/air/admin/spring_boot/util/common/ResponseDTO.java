@@ -40,33 +40,6 @@ public class ResponseDTO<T> {
         this.data = data;
     }
 
-    public ResponseDTO(Integer code, String level, boolean ok, String msg) {
-        this.ok = ok;
-        this.msg = msg;
-    }
-
-    public ResponseDTO(boolean ok, String msg, T data) {
-        this.ok = ok;
-        if (StringUtils.isNotBlank(msg)) {
-            this.msg = msg;
-        }
-        this.data = data;
-    }
-
-    public ResponseDTO(int ok ,Long current, Long size,String msg, List<T> records) {
-        this.ok = true;
-        this.msg = msg;
-        this.current = current;
-        this.size = size;
-        this.records = records;
-    }
-
-    public ResponseDTO(int okCode, T data) {
-        this.ok = true;
-        this.msg = "OK";
-        this.records = Collections.singletonList(data); // 将单个数据包装成列表
-    }
-
     public ResponseDTO(int okCode, long current, long size, String okMsg, IPage<T> page) {
         this.ok = true;
         this.msg = okMsg;
@@ -85,7 +58,7 @@ public class ResponseDTO<T> {
             IPage<T> page = (IPage<T>) data;
             return new ResponseDTO<>(OK_CODE, page.getCurrent(), page.getSize(), OK_MSG, page);
         } else {
-            return new ResponseDTO<>(OK_CODE, data);
+            return new ResponseDTO<>(OK_CODE,true, OK_MSG, data);
         }
     }
 

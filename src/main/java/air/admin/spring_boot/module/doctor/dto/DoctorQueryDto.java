@@ -1,7 +1,6 @@
 package air.admin.spring_boot.module.doctor.dto;
 
 import air.admin.spring_boot.util.PageParam;
-import com.baomidou.mybatisplus.annotation.TableField;
 import lombok.Data;
 /**
  *  医生信息查询类

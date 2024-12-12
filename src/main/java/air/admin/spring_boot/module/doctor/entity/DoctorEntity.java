@@ -15,6 +15,7 @@ public class DoctorEntity implements Serializable {
     /**
      * 医生id
     **/
+    @TableId
     private Long doctorId;
 
     /**

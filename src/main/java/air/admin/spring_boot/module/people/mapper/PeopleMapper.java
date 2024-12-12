@@ -8,7 +8,9 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+
 @Mapper
 public interface PeopleMapper extends BaseMapper<PeopleEntity> {
+
     IPage<PeopleResultDto> page(IPage<PeopleResultDto> page, @Param("param") PeopleQueryDto query);
 }
