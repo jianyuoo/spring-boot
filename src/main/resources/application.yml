@@ -24,3 +24,56 @@ mybatis-plus:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 
+sa-token:
+    # token 名称（同时也是 cookie 名称）
+  token-name: satoken
+    # token 有效期（单位：秒） 默认30天，-1 代表永久有效
+  timeout: 2592000
+    # token 最低活跃频率（单位：秒），如果 token 超过此时间没有访问系统就会被冻结，默认-1 代表不限制，永不冻结
+  active-timeout: -1
+    # 是否允许同一账号多地同时登录 （为 true 时允许一起登录, 为 false 时新登录挤掉旧登录）
+  is-concurrent: true
+    # 在多人登录同一账号时，是否共用一个 token （为 true 时所有登录共用一个 token, 为 false 时每次登录新建一个 token）
+  is-share: true
+    # token 风格（默认可取值：uuid、simple-uuid、random-32、random-64、random-128、tik）
+  token-style: uuid
+    # 是否输出操作日志
+  is-log: false
+
+############## 自定义knife4j配置 ##############
+# springdoc-openapi项目访问访问地址: http://127.0.0.1:8080/doc.html
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+      # path: 配置swagger-ui.html/UI界面的访问路径,默认为/swagger-ui.html
+    tags-sorter: alpha
+      # tags-sorter: 接口文档中的tags排序规则,默认为alpha,可选值为alpha(按字母顺序排序)或as-is(按照在代码中定义的顺序排序)
+    operations-sorter: alpha
+  
+  api-docs:
+    path: /v3/api-docs
+      # path: 配置api-docs的访问路径,默认为/v3/api-docs
+  
+  group-configs:
+      # group-configs: 配置分组信息
+    - group: 'default'
+        # group: 分组名称
+      paths-to-match: '/**'
+        # paths-to-match: 配置要匹配的路径,默认为/**
+      packages-to-scan: air.admin.spring_boot.login.controller
+        # packages-to-scan: 配置要扫描的包的路径,直接配置为Controller类所在的包名即可
+  
+  # knife4j项目访问访问地址:http://127.0.0.1:8080/doc.html#/home
+knife4j:
+  enable: true
+    # 设置为true以启用Knife4j增强功能,这将再应用程序中启用Knife4j UI
+  setting:
+      # language: 设置Knife4j UI的语言,默认为zh_cn,可选值为zh_cn或en
+    language: zh_cn
+    #开启生产环境屏蔽
+  production: false
+    #是否启用登录认证
+  basic:
+    enable: true
+    username: root # 自己设置一个
+    password: 123456 # 自己设置一个
