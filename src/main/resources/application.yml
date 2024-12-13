@@ -1,6 +1,8 @@
+server:
+  port: 8081
 spring:
   datasource:
-    url: jdbc:postgresql://192.168.2.175/oims?public=public
+    url: jdbc:postgresql://192.168.2.175/mzgl?currentSchema=public
     username: postgres
     password: z@king.com@123
     driver-class-name: org.postgresql.Driver
@@ -9,9 +11,14 @@ spring:
       host: 192.168.2.175
       port: 6379
       database: 0
-  web:
-    resources:
-      static-locations: classpath:/templates
+      timeout: 1800000
+      password:
+      jedis:
+        pool:
+          max-active: 20
+          max-wait: -1
+          max-idle: 5
+          min-idle: 0
 mybatis-plus:
   mapper-locations: classpath:/mapper/**/*.xml
   configuration:

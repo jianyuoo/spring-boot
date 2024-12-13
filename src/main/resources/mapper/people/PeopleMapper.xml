@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="air.admin.spring_boot.module.people.mapper.PeopleMapper">
+    <sql id="col">
+        id,p_name,p_age,p_gender,p_contact,p_address
+    </sql>
+    <select id="page" resultType="air.admin.spring_boot.module.doctor.dto.DoctorResultDto">
+        SELECT
+        <include refid="col"/>
+        FROM base_people
+        WHERE 1=1
+        <if test="param.id!=null and param.id!='' ">
+            AND id = #{param.id}
+        </if>
+        <if test="param.name!=null and param.name!='' ">
+            AND  p_name= #{param.name}
+        </if>
+    </select>
+</mapper>
