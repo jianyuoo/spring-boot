@@ -27,7 +27,7 @@ public class User {
     @Schema(description = "用户id")
     @TableId
     @JsonSerialize(using = ToStringSerializer.class)
-    private Long id;
+    private Long  id;
 
     @Schema(description = "用户名")
     @TableField(value = "username")

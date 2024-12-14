@@ -35,14 +35,11 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
 
     /* 用户登录请求 */
     @Override
-    public LoginResVo login(@NotNull LoginReqVo login) {
-
+    public LoginResVo login(LoginReqVo login) {
         User user = userMapper.selectOne(
                 new LambdaQueryWrapper<User>()
-                        .select(User::getId,User::getUsername,User::getPassword,User::getCreatetime,User::getUsername,User::getUpdatetime)
+                        .select(User::getUsername,User::getPassword,User::getCreatetime,User::getUsername,User::getUpdatetime)
                         .eq(User::getUsername, login.getUsername())
-                        .or()
-                        .eq(User::getId, login.getId())
         );
 
         /**
@@ -55,7 +52,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
         StpUtil.checkDisable(user.getId());
         // 通过校验后，再进行登录
         StpUtil.login(user.getId());
-        
+
         // entity数据转为vo响应的数据
         LoginResVo loginRes = userConvert.toLoginRes(user);
         loginRes.setToken(StpUtil.getTokenValue());
@@ -77,7 +74,6 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
         // 创建新用户对象
         User newUser = new User();
         newUser.setUsername(register.getUsername());
-        newUser.setId(register.getId());
         // 使用 bcrypt 加密密码
         String encryptedPassword = BCrypt.hashpw(register.getPassword());
         newUser.setPassword(encryptedPassword);
@@ -92,7 +88,6 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
         // 可选：响应对象
         RegisterResVo registerRes = new RegisterResVo();
         registerRes.setUsername(newUser.getUsername());
-        registerRes.setId(newUser.getId());
         registerRes.setCreatetime(newUser.getCreatetime());
         registerRes.setUpdatetime(newUser.getUpdatetime());
         // entity数据转为vo响应的数据

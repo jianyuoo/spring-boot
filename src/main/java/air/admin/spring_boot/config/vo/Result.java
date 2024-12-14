@@ -3,9 +3,12 @@ package air.admin.spring_boot.config.vo;
 
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 
+import java.io.Serializable;
 import java.util.List;
 
 import static air.admin.spring_boot.util.enums.StatusCodeEnum.FAIL;
@@ -17,7 +20,9 @@ import static air.admin.spring_boot.util.enums.StatusCodeEnum.SUCCESS;
  */
 @Schema(description = "结果返回类")
 @Data
-public class Result<T> {
+public class Result<T> implements Serializable {
+
+    private static final long serialVersionUID = 1L;
     /**
      * 返回状态
      */
@@ -42,7 +47,17 @@ public class Result<T> {
     @Schema(description = "返回数据")
     private T data;
 
-        
+    public Result(int i, String msg, T data) {
+        this.code = i;
+        this.msg = msg;
+        this.data = data;
+    }
+
+    public Result() {
+
+    }
+
+
     /**
      * 无参静态方法，用于创建一个表示成功结果的 Result 对象。
      * 返回一个 Result 对象，其中 flag 被设置为 true，code 被设置为成功状态码，msg 被设置为成功信息，而 data 为 null
@@ -87,5 +102,14 @@ public class Result<T> {
         r.setMsg(message);
         return r;
     }
+
+    public static<T> Result<T> successData(T data){
+        return new Result<>(200, "操作成功", data);
+    }
+
+    public static<T> Result<T> successMessage(String message){
+        return new Result<>(200, message, null);
+    }
+
 
 }

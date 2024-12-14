@@ -10,10 +10,6 @@ import org.apache.logging.log4j.core.config.plugins.validation.constraints.NotBl
 @Data
 @Schema(description = "用户注册对象")
 public class RegisterReqVo {
-    @NotBlank(message = "用户id不能为空")
-    @Schema(description = "用户id", requiredMode = Schema.RequiredMode.REQUIRED)
-    @JsonSerialize(using = ToStringSerializer.class)
-    private Long id;
 
     @NotBlank(message = "用户名不能为空")
     @Schema(description = "用户名", requiredMode = Schema.RequiredMode.REQUIRED)
