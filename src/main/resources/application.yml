@@ -63,7 +63,7 @@ springdoc:
       packages-to-scan: air.admin.spring_boot.login.controller
         # packages-to-scan: 配置要扫描的包的路径,直接配置为Controller类所在的包名即可
   
-  # knife4j项目访问访问地址:http://127.0.0.1:8080/doc.html#/home
+  # knife4j项目访问访问地址:http://127.0.0.1:8081/doc.html#/home
 knife4j:
   enable: true
     # 设置为true以启用Knife4j增强功能,这将再应用程序中启用Knife4j UI

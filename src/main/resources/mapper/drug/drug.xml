@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="air.admin.spring_boot.base.drug.Mapper.DrugMapper">
+
+    <sql id="drug">
+        drug_id,drug_name,drug_usedisease,drugurl,drug_price,
+        drug_type
+    </sql>
+    <select id="selec" resultType="air.admin.spring_boot.base.drug.dto.DrugResultDto">
+        SELECT
+        <include refid="drug" />
+        FROM mzgl_drug
+        WHERE 1=1
+        <if test="drugname != null and drugname != ''">
+            AND drug_name LIKE CONCAT('%', #{drugname}, '%')
+        </if>
+        <if test="drugtype != null and drugtype != ''">
+            AND drug_type LIKE CONCAT('%', #{drugtype}, '%')
+        </if>
+    </select>
+
+</mapper>
