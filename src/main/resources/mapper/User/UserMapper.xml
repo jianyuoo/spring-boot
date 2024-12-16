@@ -5,12 +5,18 @@
 <mapper namespace="air.admin.spring_boot.login.mapper.UserMapper">
 
     <sql id="one">
-        id,username,password,create_time,update_time
+        id,username,password
     </sql>
     <select id="selectOne" resultType="air.admin.spring_boot.login.entity.User">
         SELECT
             <include refid="one"/>
         FROM mzgl_user
         WHERE 1=1
+        <if test="id!=null or id!=''">
+            AND id = #{id}
+        </if>
+        <if test="username!=null or username!=''">
+            AND
+        </if>
     </select>
 </mapper>

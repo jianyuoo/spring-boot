@@ -14,9 +14,6 @@ import java.time.LocalDateTime;
 @Schema(description = "用户登录成功后的数据对象")
 public class RegisterResVo {
 
-    @Schema(description = "用户id")
-    @JsonSerialize(using = ToStringSerializer.class)
-    private Long id;
 
     @Schema(description = "用户名")
     private String username;

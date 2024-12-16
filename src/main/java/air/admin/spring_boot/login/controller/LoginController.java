@@ -5,14 +5,19 @@ import air.admin.spring_boot.login.service.UserService;
 import air.admin.spring_boot.login.service.impl.CaptchaService;
 import air.admin.spring_boot.login.vo.LoginReqVo;
 import air.admin.spring_boot.login.vo.RegisterReqVo;
+import air.admin.spring_boot.login.vo.VoCode;
+import cn.hutool.core.lang.UUID;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import cn.hutool.captcha.CaptchaUtil;
+import cn.hutool.captcha.CircleCaptcha;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import java.util.concurrent.TimeUnit;
+
 
 @Tag(name = "用户登录", description = "用户登录相关")
 @RestController
@@ -23,7 +28,7 @@ public class LoginController {
     UserService userService;
 
     @Autowired
-    private CaptchaService captchaService;
+    private RedisTemplate<String,String> redisTemplate;
 
     @Operation(summary = "用户登录")
     @PostMapping("/login")
@@ -41,8 +46,17 @@ public class LoginController {
 
     @Operation(summary = "获取验证码")
     @GetMapping("/captcha")
-    public void getCaptcha(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        captchaService.createCaptcha(request, response);
+    public Result getCaptcha(){
+        CircleCaptcha circleCaptcha = CaptchaUtil.createCircleCaptcha(150, 50, 4, 2);
+        String codeValue = circleCaptcha.getCode();
+        String imageBase64 = circleCaptcha.getImageBase64();
+
+        String codeKey = UUID.randomUUID().toString();
+        redisTemplate.opsForValue().set(codeKey,codeValue,5, TimeUnit.MINUTES);
+        VoCode voCode=new VoCode(codeKey,"data:images/png;base64,"+imageBase64);
+        return Result.successData(voCode);
+
+
     }
 
 
