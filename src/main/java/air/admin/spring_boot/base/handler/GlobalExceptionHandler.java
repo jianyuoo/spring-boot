@@ -8,6 +8,7 @@ import cn.dev33.satoken.exception.NotRoleException;
 
 import jakarta.validation.ConstraintViolationException;
 import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Component;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -21,8 +22,7 @@ import static air.admin.spring_boot.util.enums.StatusCodeEnum.*;
  *
  * @author ayo
  */
-        
-        
+
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
