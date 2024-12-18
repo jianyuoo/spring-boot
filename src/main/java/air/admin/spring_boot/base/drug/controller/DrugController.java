@@ -33,7 +33,7 @@ public class DrugController {
     }
 
     @Operation(summary = "药品查询")
-    @PostMapping("/getdrug") // 使用 GET 方法
+    @PostMapping("/getdrug")
     public Result getAllDrugs(@Valid @RequestBody DrugQueryDto dto) {
         try {
             // 调用服务层获取药品信息
