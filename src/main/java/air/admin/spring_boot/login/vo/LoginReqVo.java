@@ -14,7 +14,6 @@ import org.apache.logging.log4j.core.config.plugins.validation.constraints.NotBl
 public class LoginReqVo {
 
     @NotBlank(message = "用户名不能为空")
-    //@Schema(description = "用户名",required = true) // required = true弃用了
     @Schema(description = "用户名", requiredMode = Schema.RequiredMode.REQUIRED)
     private String username;
 
