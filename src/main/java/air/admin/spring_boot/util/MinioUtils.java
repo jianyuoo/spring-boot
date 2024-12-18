@@ -8,6 +8,8 @@ import io.minio.messages.Item;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.Nullable;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
@@ -256,28 +258,43 @@ public class MinioUtils {
      * @param imageName
      * @return
      */
-    public ObjectWriteResponse uploadImage(String bucketName, String imageBase64, String imageName) {
+    public ObjectWriteResponse uploadImage(String bucketName, String imageBase64, String name,String imageName) {
         if (!StringUtils.isEmpty(imageBase64)) {
             InputStream in = base64ToInputStream(imageBase64);
-            String newName = System.currentTimeMillis() + "_" + imageName + ".jpg";
-            String year = String.valueOf(new Date().getYear());
-            String month = String.valueOf(new Date().getMonth());
-            return uploadFile(bucketName, year + "/" + month + "/" + newName, in);
-
+            String newName = name +"-"+ imageName + ".jpg";
+            return uploadFile(bucketName, newName, in);
         }
         return null;
     }
 
     public static InputStream base64ToInputStream(String base64) {
-        ByteArrayInputStream stream = null;
-        try {
-            byte[] bytes = Base64.getDecoder().decode(base64.trim());
-            stream = new ByteArrayInputStream(bytes);
-        } catch (Exception e) {
-            e.printStackTrace();
+        // 确保 Base64 字符串不为空
+        if (base64 == null || base64.trim().isEmpty()) {
+            throw new IllegalArgumentException("Base64 string cannot be null or empty");
         }
-        return stream;
+
+        try {
+            // 去掉可能的前缀，例如 "data:image/jpeg;base64,"
+            if (base64.startsWith("data:image/jpeg;base64,")) {
+                base64 = base64.substring("data:image/jpeg;base64,".length());
+            } else if (base64.startsWith("data:image/png;base64,")) {
+                base64 = base64.substring("data:image/png;base64,".length());
+            }
+            // 解码 Base64 字符串
+            byte[] bytes = Base64.getDecoder().decode(base64.trim());
+            // 返回 ByteArrayInputStream
+            return new ByteArrayInputStream(bytes);
+        } catch (IllegalArgumentException e) {
+            // 捕获无效的 Base64 编码异常
+            e.printStackTrace();
+            return null; // 或者抛出自定义异常
+        } catch (Exception e) {
+            // 捕获其他异常，例如运行时异常
+            e.printStackTrace();
+            return null; // 或者抛出自定义异常
+        }
     }
+
 
 
     /**
