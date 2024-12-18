@@ -3,13 +3,10 @@ package air.admin.spring_boot.config.vo;
 
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 
 import java.io.Serializable;
-import java.util.List;
 
 import static air.admin.spring_boot.util.enums.StatusCodeEnum.FAIL;
 import static air.admin.spring_boot.util.enums.StatusCodeEnum.SUCCESS;
@@ -46,6 +43,10 @@ public class Result<T> implements Serializable {
      */
     @Schema(description = "返回数据")
     private T data;
+    /**
+     * 返回异常
+     */
+    private Exception e;
 
     public Result(int i, String msg, T data) {
         this.code = i;
@@ -103,6 +104,7 @@ public class Result<T> implements Serializable {
         return r;
     }
 
+
     public static<T> Result<T> successData(T data){
         return new Result<>(200, "操作成功", data);
     }
@@ -111,5 +113,9 @@ public class Result<T> implements Serializable {
         return new Result<>(200, message, null);
     }
 
+
+    public static Result failure(String s) {
+        return buildResult(false, s, FAIL.getCode(), FAIL.getMsg());
+    }
 
 }

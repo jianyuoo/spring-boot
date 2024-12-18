@@ -1,6 +1,7 @@
 package air.admin.spring_boot.base.drug.entity;
 
 import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
@@ -10,7 +11,7 @@ public class Drug {
     /**
      *  药品id
      * */
-    @TableField(value = "drug_id")
+    @TableId(value = "drug_id")
     private Integer drugid;
 
     /**

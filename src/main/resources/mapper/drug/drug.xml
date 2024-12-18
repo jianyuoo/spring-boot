@@ -5,9 +5,10 @@
 <mapper namespace="air.admin.spring_boot.base.drug.Mapper.DrugMapper">
 
     <sql id="drug">
-        drug_id,drug_name,drug_usedisease,drugurl,drug_price,
-        drug_type
+        drug_id,drug_name,drug_usedisease,
+        drug_type,drugurl,drug_price
     </sql>
+
     <select id="selec" resultType="air.admin.spring_boot.base.drug.dto.DrugResultDto">
         SELECT
         <include refid="drug" />
