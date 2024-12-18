@@ -74,4 +74,11 @@ public class DrugController {
     public Result delec(){
         return Result.success();
     }
+
+    @Operation(summary = "药品删除")
+    @PostMapping("/delete")
+    public Result delate (@Valid @RequestBody DrugQueryDto dto){
+        drugService.delete(dto);
+        return Result.success();
+    }
 }

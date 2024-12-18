@@ -3,9 +3,7 @@ package air.admin.spring_boot.base.drug.service;
 import air.admin.spring_boot.base.drug.dto.DrugQueryDto;
 import air.admin.spring_boot.base.drug.dto.DrugResultDto;
 import air.admin.spring_boot.base.drug.Mapper.DrugMapper;
-import air.admin.spring_boot.base.drug.dto.DrugUpdataDto;
 import air.admin.spring_boot.base.drug.entity.Drug;
-import air.admin.spring_boot.config.vo.Result;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,8 +21,7 @@ public class DrugService extends ServiceImpl<DrugMapper, Drug> {
     public DrugResultDto getAllDrugs(@Valid DrugQueryDto dto) {
         return drugMapper.selec(dto);
     }
-
-    public int updat(Drug drug) {
-        return drugMapper.updateById(drug);
+    public void delete(@Valid DrugQueryDto dto) {
+        drugMapper.delete(dto);
     }
 }

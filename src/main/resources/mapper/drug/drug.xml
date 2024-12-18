@@ -21,5 +21,16 @@
             AND drug_type LIKE CONCAT('%', #{drugtype}, '%')
         </if>
     </select>
+    <delete id="delete" >
+        DELETE
+        FROM mzgl_drug
+        WHERE 1=1
+        <if test="drugname != null and drugname != ''">
+            AND drug_name LIKE CONCAT('%', #{drugname}, '%')
+        </if>
+        <if test="drugtype != null and drugtype != ''">
+            AND drug_type LIKE CONCAT('%', #{drugtype}, '%')
+        </if>
+    </delete>
 
 </mapper>

@@ -11,5 +11,6 @@ import org.apache.ibatis.annotations.Mapper;
 public interface DrugMapper extends BaseMapper<Drug> {
 
     DrugResultDto selec(DrugQueryDto query);
+    void delete(DrugQueryDto query);
 
 }
