@@ -20,7 +20,9 @@ import org.springframework.security.web.access.ExceptionTranslationFilter;
 public class Secuityconfig {
 
     private String[] URL_WHITELIST = {
-            "/v1/**"
+            "/v1/**",
+            "/drug/**",
+            "/patient/**"
     };
     private final CustomerUserDetailsService customUserDetailsService;
 
