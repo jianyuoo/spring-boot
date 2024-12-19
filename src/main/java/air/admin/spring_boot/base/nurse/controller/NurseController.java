@@ -1,9 +1,8 @@
 package air.admin.spring_boot.base.nurse.controller;
 
 import air.admin.spring_boot.base.nurse.dto.NurseSaveDto;
-import air.admin.spring_boot.base.nurse.entity.NerseEntity;
+import air.admin.spring_boot.base.nurse.entity.NurseEntity;
 import air.admin.spring_boot.base.nurse.service.NurseService;
-import air.admin.spring_boot.base.patient.dto.PatientSaveDto;
 import air.admin.spring_boot.base.patient.entity.PatientEntity;
 import air.admin.spring_boot.util.Result;
 import io.swagger.v3.oas.annotations.Operation;
@@ -23,9 +22,9 @@ public class NurseController {
     @Operation(summary = "添加护士")
     @PostMapping("/add")
     public Result add(@Valid @RequestBody NurseSaveDto dto){
-        NerseEntity nerse = new NerseEntity();
-        BeanUtils.copyProperties(dto,nerse);
-        nurseService.save(nerse);
-        return Result.success(nerse);
+        NurseEntity nurse =new NurseEntity();
+        BeanUtils.copyProperties(dto,nurse);
+        nurseService.save(nurse);
+        return Result.success(nurse);
     }
 }

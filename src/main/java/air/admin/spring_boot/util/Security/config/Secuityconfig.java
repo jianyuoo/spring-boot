@@ -22,7 +22,8 @@ public class Secuityconfig {
     private String[] URL_WHITELIST = {
             "/v1/**",
             "/drug/**",
-            "/patient/**"
+            "/patient/**",
+            "/nurse/**"
     };
     private final CustomerUserDetailsService customUserDetailsService;
 
