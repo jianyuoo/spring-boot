@@ -24,7 +24,8 @@ public class Secuityconfig {
             "/v1/**",
             "/drug/**",
             "/patient/**",
-            "/nurse/**"
+            "/nurse/**",
+            "/doctor/**"
     };
     private final CustomerUserDetailsService customUserDetailsService;
 
