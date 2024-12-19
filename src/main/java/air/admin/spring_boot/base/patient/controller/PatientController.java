@@ -1,7 +1,5 @@
 package air.admin.spring_boot.base.patient.controller;
 
-import air.admin.spring_boot.base.drug.dto.DrugQueryDto;
-import air.admin.spring_boot.base.drug.dto.DrugResultDto;
 import air.admin.spring_boot.base.patient.dto.PatientQueryDto;
 import air.admin.spring_boot.base.patient.dto.PatientResultDto;
 import air.admin.spring_boot.base.patient.dto.PatientSaveDto;

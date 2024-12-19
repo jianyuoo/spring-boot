@@ -8,7 +8,7 @@ public class PatientSaveDto {
     /**
      * patient_id
      */
-    @TableField(value = "patient_id")
+    @TableField(value = "id")
     private Long patientId;
 
     /**
