@@ -17,7 +17,7 @@ public class Cases {
     /**
      *  病例名称
      * */
-    private String casename;
+    private String name;
     /**
      *  患者id
      * */
