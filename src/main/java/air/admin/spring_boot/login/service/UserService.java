@@ -1,14 +1,20 @@
 package air.admin.spring_boot.login.service;
 
-import air.admin.spring_boot.login.vo.LoginReqVo;
-import air.admin.spring_boot.login.vo.LoginResVo;
-import air.admin.spring_boot.login.vo.RegisterReqVo;
-import air.admin.spring_boot.login.vo.RegisterResVo;
-import jakarta.validation.constraints.NotNull;
+import air.admin.spring_boot.login.entity.User;
+import air.admin.spring_boot.login.mapper.loginmapper;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.apache.ibatis.annotations.Select;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-public interface UserService {
-    /* 用户登录请求 */
-    LoginResVo login(LoginReqVo login);
+@Service
+public class UserService extends ServiceImpl<loginmapper, User> {
 
-    RegisterResVo register(@NotNull RegisterReqVo register);
+    @Autowired
+    private loginmapper loginmapper;
+
+    public boolean existsByUsername(String username) {
+        String user = loginmapper.findUsernameByUsername(username); // 查询用户名
+        return user != null; // 如果 user 不为 null，则用户名已存在
+    }
 }

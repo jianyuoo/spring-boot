@@ -1,4 +1,4 @@
-package air.admin.spring_boot.config.vo;
+package air.admin.spring_boot.util;
 
 
 

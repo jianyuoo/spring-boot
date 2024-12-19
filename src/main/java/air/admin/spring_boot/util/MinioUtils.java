@@ -1,6 +1,7 @@
 package air.admin.spring_boot.util;
 
 import io.minio.*;
+import io.minio.Result;
 import io.minio.http.Method;
 import io.minio.messages.Bucket;
 import io.minio.messages.DeleteObject;
@@ -8,8 +9,6 @@ import io.minio.messages.Item;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
-import org.jetbrains.annotations.Contract;
-import org.jetbrains.annotations.Nullable;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
@@ -138,9 +137,9 @@ public class MinioUtils {
     public boolean isFolderExist(String bucketName, String objectName) {
         boolean exist = false;
         try {
-            Iterable<Result<Item>> results = minioClient.listObjects(
+            Iterable<io.minio.Result<Item>> results = minioClient.listObjects(
                     ListObjectsArgs.builder().bucket(bucketName).prefix(objectName).recursive(false).build());
-            for (Result<Item> result : results) {
+            for (io.minio.Result<Item> result : results) {
                 Item item = result.get();
                 if (item.isDir() && objectName.equals(item.objectName())) {
                     exist = true;
@@ -166,10 +165,10 @@ public class MinioUtils {
                                             String prefix,
                                             boolean recursive) {
         List<Item> list = new ArrayList<>();
-        Iterable<Result<Item>> objectsIterator = minioClient.listObjects(
+        Iterable<io.minio.Result<Item>> objectsIterator = minioClient.listObjects(
                 ListObjectsArgs.builder().bucket(bucketName).prefix(prefix).recursive(recursive).build());
         if (objectsIterator != null) {
-            for (Result<Item> o : objectsIterator) {
+            for (io.minio.Result<Item> o : objectsIterator) {
                 Item item = o.get();
                 list.add(item);
             }

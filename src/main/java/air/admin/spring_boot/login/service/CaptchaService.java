@@ -1,4 +1,4 @@
-package air.admin.spring_boot.login.service.impl;
+package air.admin.spring_boot.login.service;
 
 import com.google.code.kaptcha.impl.DefaultKaptcha;
 import com.google.code.kaptcha.util.Config;

@@ -6,8 +6,7 @@ import air.admin.spring_boot.base.drug.dto.DrugSaveDto;
 import air.admin.spring_boot.base.drug.dto.DrugUpdataDto;
 import air.admin.spring_boot.base.drug.entity.Drug;
 import air.admin.spring_boot.base.drug.service.DrugService;
-import air.admin.spring_boot.config.vo.Result;
-import air.admin.spring_boot.util.AOP.AdminOnly;
+import air.admin.spring_boot.util.Result;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
@@ -23,9 +22,9 @@ public class DrugController {
     @Autowired
     private DrugService drugService;
 
+//    @HasPermission("ADMIN_PERMISSION")
     @Operation(summary = "药品新增")
     @PostMapping("/add")
-    @AdminOnly
     public Result add(@Valid @RequestBody DrugSaveDto dto){
         String url = drugService.setImage(dto);
         dto.setDrugurl(url);
