@@ -40,11 +40,12 @@ public class DoctorService extends ServiceImpl<DoctorMapper, Doctor> {
         return password;
     }
 
-    public boolean setdoctor(@NotNull DoctorSaveDto dto) {
+    public boolean setdoctor(@NotNull DoctorSaveDto dto ,Doctor doctor) {
         User user = new User();
         user.setId(dto.getId());
         user.setUsername(dto.getUsername());
         user.setPassword(setUserPassword(dto.getId()));
-        return userService.save(user);
+        userService.save(user);
+        return save(doctor);
     }
 }

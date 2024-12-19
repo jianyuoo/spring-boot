@@ -31,9 +31,7 @@ public class DoctorController {
     public Result add(@RequestBody DoctorSaveDto dto) {
         Doctor doctor = new Doctor();
         BeanUtils.copyProperties(dto, doctor);
-        doctorService.save(doctor);
-        doctorService.setdoctor(dto);
-        return Result.success();
+        return Result.success(doctorService.setdoctor(dto,doctor));
     }
 
     //医生信息查询
