@@ -48,4 +48,10 @@ public class PatientController {
         }
 
     }
+    @Operation(summary = "患者删除")
+    @PostMapping("/delete")
+    public Result delate (@Valid @RequestBody PatientQueryDto dto){
+        patientService.delete(dto);
+        return Result.success();
+    }
 }

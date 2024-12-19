@@ -1,10 +1,12 @@
 package air.admin.spring_boot.base.patient.service;
 
+import air.admin.spring_boot.base.drug.dto.DrugQueryDto;
 import air.admin.spring_boot.base.patient.dto.PatientQueryDto;
 import air.admin.spring_boot.base.patient.dto.PatientResultDto;
 import air.admin.spring_boot.base.patient.entity.PatientEntity;
 import air.admin.spring_boot.base.patient.mapper.PatientMapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import jakarta.validation.Valid;
 import org.checkerframework.checker.units.qual.A;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,5 +19,9 @@ public class PatientService extends ServiceImpl<PatientMapper, PatientEntity> {
 
     public PatientResultDto getAllPatient(PatientQueryDto dto) {
         return patientMapper.getAllPatient(dto);
+    }
+
+    public void delete(@Valid PatientQueryDto dto) {
+        patientMapper.delete(dto);
     }
 }
