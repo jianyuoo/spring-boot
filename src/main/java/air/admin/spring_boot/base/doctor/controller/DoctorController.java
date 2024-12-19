@@ -23,17 +23,13 @@ public class DoctorController {
     @Autowired
     private DoctorService doctorService;
 
-    @Autowired
-    private UserService userService;
 
     //医生信息增加
     @PostMapping("/add")
     public Result add(@RequestBody DoctorSaveDto dto) {
         Doctor doctor = new Doctor();
         BeanUtils.copyProperties(dto, doctor);
-        doctorService.save(doctor);
-        userService.setdoctor(dto);
-        return Result.success();
+        return Result.success(doctorService.setdoctor(dto,doctor));
     }
 
     //医生信息查询

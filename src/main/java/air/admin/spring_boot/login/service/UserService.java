@@ -16,8 +16,7 @@ public class UserService extends ServiceImpl<loginmapper, User> {
     @Autowired
     private loginmapper loginmapper;
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+
 
     public boolean existsByUsername(String username) {
         String user = loginmapper.findUsernameByUsername(username); // 查询用户名
@@ -28,22 +27,5 @@ public class UserService extends ServiceImpl<loginmapper, User> {
         loginmapper.insert(newUser);
     }
 
-    public String setUserPassword(Long id) {
-        // 获取用户ID，并将其转换为字符串
-        String userIdStr = String.valueOf(id);
-        // 获取ID的后六位
-        String password = userIdStr.length() > 6 ? userIdStr.substring(userIdStr.length() - 6) : userIdStr;
-        //加密用户密码
-        password = passwordEncoder.encode(password);
-        // 设置用户密码
-        return password;
-    }
 
-    public boolean setdoctor(@NotNull DoctorSaveDto dto) {
-        User user = new User();
-        user.setId(dto.getId());
-        user.setUsername(dto.getUsername());
-        user.setPassword(setUserPassword(dto.getId()));
-        return save(user);
-    }
 }
