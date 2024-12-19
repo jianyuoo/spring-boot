@@ -6,6 +6,6 @@ import lombok.Data;
 @Data
 public class DoctorQueryDto {
 
-    @TableField(value = "doctor_id")
-    private Long doctorid;
+    @TableField(value = "id")
+    private Long id;
 }

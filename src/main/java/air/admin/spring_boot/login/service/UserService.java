@@ -7,6 +7,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.apache.ibatis.annotations.Select;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -14,6 +15,9 @@ public class UserService extends ServiceImpl<loginmapper, User> {
 
     @Autowired
     private loginmapper loginmapper;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     public boolean existsByUsername(String username) {
         String user = loginmapper.findUsernameByUsername(username); // 查询用户名
@@ -29,6 +33,8 @@ public class UserService extends ServiceImpl<loginmapper, User> {
         String userIdStr = String.valueOf(id);
         // 获取ID的后六位
         String password = userIdStr.length() > 6 ? userIdStr.substring(userIdStr.length() - 6) : userIdStr;
+        //加密用户密码
+        password = passwordEncoder.encode(password);
         // 设置用户密码
         return password;
     }
