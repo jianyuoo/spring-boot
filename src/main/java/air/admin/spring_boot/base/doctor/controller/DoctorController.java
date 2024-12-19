@@ -32,7 +32,7 @@ public class DoctorController {
         Doctor doctor = new Doctor();
         BeanUtils.copyProperties(dto, doctor);
         doctorService.save(doctor);
-        userService.setdoctor(dto);
+        doctorService.setdoctor(dto);
         return Result.success();
     }
 
