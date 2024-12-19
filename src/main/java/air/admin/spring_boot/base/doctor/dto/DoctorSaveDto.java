@@ -5,21 +5,12 @@ import lombok.Data;
 
 @Data
 public class DoctorSaveDto {
-    @TableField(value = "doctor_id")
-    private Long  doctorid;
+    @TableField(value = "id")
+    private Long  id;
 
-    @TableField(value = "doctor_name")
+    @TableField(value = "name")
     private String name;
 
-    @TableField(value = "age")
-    private String age;
-
-    @TableField(value = "sex")
-    private String sex;
-
-    @TableField(value = "department_id")
-    private String departmentid;
-
-    @TableField(value = "jobtitle")
-    private String jobtitle;
+    @TableField(value = "username")
+    private String username;
 }

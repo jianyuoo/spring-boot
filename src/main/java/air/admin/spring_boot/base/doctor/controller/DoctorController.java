@@ -4,7 +4,10 @@ package air.admin.spring_boot.base.doctor.controller;
 import air.admin.spring_boot.base.doctor.dto.DoctorQueryDto;
 import air.admin.spring_boot.base.doctor.dto.DoctorSaveDto;
 import air.admin.spring_boot.base.doctor.entity.Doctor;
+import air.admin.spring_boot.base.doctor.mapper.DoctorMapper;
 import air.admin.spring_boot.base.doctor.service.DoctorService;
+import air.admin.spring_boot.login.entity.User;
+import air.admin.spring_boot.login.service.UserService;
 import air.admin.spring_boot.util.Result;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.checkerframework.checker.units.qual.A;
@@ -20,12 +23,16 @@ public class DoctorController {
     @Autowired
     private DoctorService doctorService;
 
+    @Autowired
+    private UserService userService;
+
     //医生信息增加
     @PostMapping("/add")
     public Result add(@RequestBody DoctorSaveDto dto) {
         Doctor doctor = new Doctor();
         BeanUtils.copyProperties(dto, doctor);
         doctorService.save(doctor);
+        userService.setdoctor(dto);
         return Result.success();
     }
 
