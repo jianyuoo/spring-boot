@@ -4,5 +4,5 @@ import lombok.Data;
 
 @Data
 public class NurseQueryDto {
-    private int nurseId;//护士id
+    private Long id;//护士id
 }
