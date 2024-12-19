@@ -17,7 +17,6 @@ import cn.hutool.captcha.CircleCaptcha;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
@@ -51,7 +50,7 @@ public class LoginController {
 
     // 登录请求处理
     @PostMapping("/login")
-    public Result<String> login(@RequestBody LoginRequest loginRequest) {
+    public Result login(@RequestBody LoginRequest loginRequest) {
         // 通过用户名加载用户详细信息
         MyUserDetails myUserDetails = customerUserDetailsService.loadUserByUsername(loginRequest.getUsername());
 
@@ -73,8 +72,8 @@ public class LoginController {
 
         // 创建新用户
         User newUser = new User();
-        newUser.setName(registerRequest.getName());
         newUser.setUsername(registerRequest.getUsername());
+        newUser.setId(registerRequest.getId());
         newUser.setPassword(passwordEncoder.encode(registerRequest.getPassword())); // 密码加密
 
         // 保存用户到数据库

@@ -25,7 +25,6 @@ public class MyUserDetails implements UserDetails {
         return password;
     }
 
-    @Override
     public String getUsername() {
         return username;
     }

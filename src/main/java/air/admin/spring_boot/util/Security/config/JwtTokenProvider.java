@@ -20,7 +20,7 @@ public class JwtTokenProvider {
     // 生成 JWT Token
     public String generateToken(String username) {
         return Jwts.builder()
-                .setSubject(username)
+                .setSubject(String.valueOf(username))
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
                 .signWith(SignatureAlgorithm.HS512, secretKey)

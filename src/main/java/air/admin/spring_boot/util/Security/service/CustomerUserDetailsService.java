@@ -14,7 +14,7 @@ public class CustomerUserDetailsService implements UserDetailsService {
     @Autowired
     private loginmapper loginmapper;
 
-    @Override
+
     public MyUserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         return loginmapper.loadUserByUsername(username); // 此处返回实际用户信息
     }
