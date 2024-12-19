@@ -23,8 +23,6 @@ public class DoctorController {
     @Autowired
     private DoctorService doctorService;
 
-    @Autowired
-    private UserService userService;
 
     //医生信息增加
     @PostMapping("/add")
