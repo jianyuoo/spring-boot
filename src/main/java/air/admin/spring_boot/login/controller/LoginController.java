@@ -78,7 +78,7 @@ public class LoginController {
         newUser.setPassword(passwordEncoder.encode(registerRequest.getPassword())); // 密码加密
 
         // 保存用户到数据库
-        userService.save(newUser);
+        userService.inster(newUser);
 
         return Result.success("注册成功");
     }

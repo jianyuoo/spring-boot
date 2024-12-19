@@ -17,4 +17,8 @@ public class UserService extends ServiceImpl<loginmapper, User> {
         String user = loginmapper.findUsernameByUsername(username); // 查询用户名
         return user != null; // 如果 user 不为 null，则用户名已存在
     }
+
+    public void inster(User newUser) {
+        loginmapper.insert(newUser);
+    }
 }
