@@ -89,12 +89,10 @@ public class LoginController {
         CircleCaptcha circleCaptcha = CaptchaUtil.createCircleCaptcha(150, 50, 4, 2);
         String codeValue = circleCaptcha.getCode();
         String imageBase64 = circleCaptcha.getImageBase64();
-
         String codeKey = UUID.randomUUID().toString();
         redisTemplate.opsForValue().set(codeKey,codeValue,5, TimeUnit.MINUTES);
         VoCode voCode=new VoCode(codeKey,"data:images/png;base64,"+imageBase64);
         return Result.successData(voCode);
-
 
     }
 
