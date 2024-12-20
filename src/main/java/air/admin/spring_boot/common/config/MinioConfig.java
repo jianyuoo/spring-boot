@@ -1,4 +1,4 @@
-package air.admin.spring_boot.config;
+package air.admin.spring_boot.common.config;
 
 
 import io.minio.MinioClient;

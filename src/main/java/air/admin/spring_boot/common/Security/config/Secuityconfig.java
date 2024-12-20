@@ -1,8 +1,7 @@
-package air.admin.spring_boot.util.Security.config;
+package air.admin.spring_boot.common.Security.config;
 
 
-import air.admin.spring_boot.util.Security.service.CustomerUserDetailsService;
-import org.springframework.beans.factory.annotation.Value;
+import air.admin.spring_boot.common.Security.service.CustomerUserDetailsService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -12,7 +11,6 @@ import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.access.ExceptionTranslationFilter;
@@ -25,7 +23,8 @@ public class Secuityconfig {
             "/drug/**",
             "/patient/**",
             "/nurse/**",
-            "/doctor/**"
+            "/doctor/**",
+            "/examine/**"
     };
     private final CustomerUserDetailsService customUserDetailsService;
 

@@ -1,4 +1,4 @@
-package air.admin.spring_boot.util.Security.config;
+package air.admin.spring_boot.common.Security.config;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;

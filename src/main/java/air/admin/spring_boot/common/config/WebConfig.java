@@ -1,4 +1,4 @@
-package air.admin.spring_boot.config;
+package air.admin.spring_boot.common.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

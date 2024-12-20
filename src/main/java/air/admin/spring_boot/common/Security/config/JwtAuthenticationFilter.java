@@ -1,6 +1,6 @@
-package air.admin.spring_boot.util.Security.config;
+package air.admin.spring_boot.common.Security.config;
 
-import air.admin.spring_boot.util.Security.service.CustomerUserDetailsService;
+import air.admin.spring_boot.common.Security.service.CustomerUserDetailsService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

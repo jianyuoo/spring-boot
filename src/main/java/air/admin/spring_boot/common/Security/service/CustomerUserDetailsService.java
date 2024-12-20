@@ -1,4 +1,4 @@
-package air.admin.spring_boot.util.Security.service;
+package air.admin.spring_boot.common.Security.service;
 
 import air.admin.spring_boot.login.entity.MyUserDetails;
 import air.admin.spring_boot.login.mapper.loginmapper;
