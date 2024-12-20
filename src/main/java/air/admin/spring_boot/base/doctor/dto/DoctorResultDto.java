@@ -5,21 +5,19 @@ import lombok.Data;
 
 @Data
 public class DoctorResultDto {
-    @TableField(value = "doctor_id")
-    private Long  doctorid;
 
-    @TableField(value = "doctor_name")
+
+    private Long  id;
+
+    private String  password;
+
     private String name;
 
-    @TableField(value = "age")
     private String age;
 
-    @TableField(value = "sex")
     private String sex;
 
-    @TableField(value = "department_id")
     private String departmentid;
 
-    @TableField(value = "jobtitle")
     private String jobtitle;
 }

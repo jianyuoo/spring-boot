@@ -2,6 +2,7 @@ package air.admin.spring_boot.base.doctor.controller;
 
 
 import air.admin.spring_boot.base.doctor.dto.DoctorQueryDto;
+import air.admin.spring_boot.base.doctor.dto.DoctorResultDto;
 import air.admin.spring_boot.base.doctor.dto.DoctorSaveDto;
 import air.admin.spring_boot.base.doctor.entity.Doctor;
 import air.admin.spring_boot.base.doctor.mapper.DoctorMapper;
@@ -14,6 +15,8 @@ import org.checkerframework.checker.units.qual.A;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Tag(name = "医生类", description = "医生信息相关")
 @RestController
@@ -34,7 +37,7 @@ public class DoctorController {
 
     //医生信息查询
     @GetMapping("/select")
-    public Result findAll(@RequestParam DoctorQueryDto dto ) {
-        return doctorService.select(dto);
+    public Result findAll(@RequestBody DoctorQueryDto dto ) {
+        return Result.success(doctorService.select(dto));
     }
 }

@@ -1,6 +1,7 @@
 package air.admin.spring_boot.base.doctor.service;
 
 import air.admin.spring_boot.base.doctor.dto.DoctorQueryDto;
+import air.admin.spring_boot.base.doctor.dto.DoctorResultDto;
 import air.admin.spring_boot.base.doctor.dto.DoctorSaveDto;
 import air.admin.spring_boot.base.doctor.entity.Doctor;
 import air.admin.spring_boot.base.doctor.mapper.DoctorMapper;
@@ -12,6 +13,8 @@ import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class DoctorService extends ServiceImpl<DoctorMapper, Doctor> {
@@ -25,11 +28,11 @@ public class DoctorService extends ServiceImpl<DoctorMapper, Doctor> {
     @Autowired
     private UserService userService;
 
-    public Result select(DoctorQueryDto dto) {
+    public DoctorResultDto select(DoctorQueryDto dto) {
         return doctorMapper.select(dto);
     }
 
-    public String setUserPassword(Long id) {
+    public String Password(Long id) {
         // 获取用户ID，并将其转换为字符串
         String userIdStr = String.valueOf(id);
         // 获取ID的后六位
@@ -44,7 +47,7 @@ public class DoctorService extends ServiceImpl<DoctorMapper, Doctor> {
         User user = new User();
         user.setId(dto.getId());
         user.setUsername(dto.getUsername());
-        user.setPassword(setUserPassword(dto.getId()));
+        user.setPassword(Password(dto.getId()));
         userService.save(user);
         return save(doctor);
     }

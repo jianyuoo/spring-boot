@@ -4,10 +4,11 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="air.admin.spring_boot.base.doctor.mapper.DoctorMapper">
 
-    <select id="select" resultType="air.admin.spring_boot.util.Result">
-        SELECT
-            *
+    <select id="select" resultType="air.admin.spring_boot.base.doctor.dto.DoctorResultDto">
+        SELECT DISTINCT mzgl_user.password, mzgl_doctor.*  -- 替换为你需要的列
         FROM mzgl_doctor
-        WHERE id=#{id}
+        JOIN mzgl_user ON mzgl_doctor.id = mzgl_user.id
+        WHERE mzgl_doctor.id = #{id};
     </select>
+
 </mapper>
