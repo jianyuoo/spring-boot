@@ -14,6 +14,9 @@ public class NurseEntity {
     @TableField(value = "name")
     private String name;//护士姓名
 
+    @TableField(value = "username")
+    private String username;
+
     @TableField(value = "jobtitle")
     private String jobtitle;//护士职称
 

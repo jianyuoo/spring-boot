@@ -5,15 +5,17 @@ import lombok.Data;
 
 @Data
 public class NurseSaveDto {
-    @TableField(value = "id")
+
     private Long id;//护士id
 
-    @TableField(value = "name")
+    private String username; //护士账号
+
+
     private String name;//护士姓名
 
-    @TableField(value = "jobtitle")
+
     private String jobtitle;//护士职称
 
-    @TableField(value = "department_id")
+
     private Long departmentId;//部门id
 }

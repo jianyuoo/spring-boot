@@ -16,14 +16,18 @@ public class PatientEntity implements Serializable {
     /**
      * patient_id
      */
-    @TableField(value = "patient_id")
-    private Long patientId;
+    @TableField(value = "id")
+    private Long id;
 
     /**
      * name
      */
     @TableField(value = "name")
     private String name;
+
+
+    @TableField(value = "username")
+    private String username;
 
     /**
      * age
@@ -36,12 +40,6 @@ public class PatientEntity implements Serializable {
      */
     @TableField(value = "sex")
     private String sex;
-
-    /**
-     * data_time
-     */
-    @TableField(value = "data_time")
-    private LocalDateTime dataTime;
 
     /**
      * cases_id

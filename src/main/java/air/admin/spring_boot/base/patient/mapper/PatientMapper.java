@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
 public interface PatientMapper extends BaseMapper<PatientEntity> {
+
     PatientResultDto getAllPatient(PatientQueryDto dto);
 
     void delete(PatientQueryDto dto);

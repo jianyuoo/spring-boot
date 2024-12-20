@@ -8,37 +8,33 @@ public class PatientSaveDto {
     /**
      * patient_id
      */
-    @TableField(value = "id")
-    private Long patientId;
+    private Long id;
 
     /**
      * name
      */
-    @TableField(value = "name")
     private String name;
+
+
+    private String username;
 
     /**
      * age
      */
-    @TableField(value = "age")
     private String age;
 
     /**
      * sex
      */
-    @TableField(value = "sex")
     private String sex;
 
     /**
      * cases_id
      */
-    @TableField(value = "cases_id")
-    private String casesId;
+    private String casesid;
 
     /**
      * hospitalized_status
      */
-    @TableField(value = "hospitalized_status")
     private boolean hospitalizedStatus;
-
 }

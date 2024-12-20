@@ -92,7 +92,6 @@ public class LoginController {
         redisTemplate.opsForValue().set(codeKey,codeValue,5, TimeUnit.MINUTES);
         VoCode voCode=new VoCode(codeKey,"data:images/png;base64,"+imageBase64);
         return Result.successData(voCode);
-
     }
 
 

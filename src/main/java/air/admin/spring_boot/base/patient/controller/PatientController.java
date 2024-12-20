@@ -25,9 +25,7 @@ public class PatientController {
     @PostMapping("/add")
     public Result add(@Valid @RequestBody PatientSaveDto dto){
         PatientEntity patient =new PatientEntity();
-        BeanUtils.copyProperties(dto,patient);
-        patientService.save(patient);
-        return Result.success(patient);
+        return Result.success(patientService.set(dto,patient));
     }
 
     @Operation(summary = "药品查询")

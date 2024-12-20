@@ -4,5 +4,6 @@ import lombok.Data;
 
 @Data
 public class PatientQueryDto {
-    private Long patientId;
+
+    private Long id;
 }

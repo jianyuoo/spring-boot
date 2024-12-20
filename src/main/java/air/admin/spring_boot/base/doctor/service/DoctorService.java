@@ -7,14 +7,12 @@ import air.admin.spring_boot.base.doctor.entity.Doctor;
 import air.admin.spring_boot.base.doctor.mapper.DoctorMapper;
 import air.admin.spring_boot.login.entity.User;
 import air.admin.spring_boot.login.service.UserService;
-import air.admin.spring_boot.util.Result;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.jetbrains.annotations.NotNull;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public class DoctorService extends ServiceImpl<DoctorMapper, Doctor> {
@@ -43,8 +41,9 @@ public class DoctorService extends ServiceImpl<DoctorMapper, Doctor> {
         return password;
     }
 
-    public boolean setdoctor(@NotNull DoctorSaveDto dto ,Doctor doctor) {
+    public boolean set(@NotNull DoctorSaveDto dto , Doctor doctor) {
         User user = new User();
+        BeanUtils.copyProperties(dto, doctor);
         user.setId(dto.getId());
         user.setUsername(dto.getUsername());
         user.setPassword(Password(dto.getId()));
