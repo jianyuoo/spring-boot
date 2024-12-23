@@ -36,31 +36,23 @@ public class LoginController {
     private RedisTemplate<String,String> redisTemplate;
 
     @Autowired
-    private JwtTokenProvider jwtTokenProvider; // JWT 服务
-
-    @Autowired
-    private AuthenticationManager authenticationManagerBean; // Spring Security 的AuthenticationManager
-
-    @Autowired
     private PasswordEncoder passwordEncoder;
 
-    @Autowired
-    private CustomerUserDetailsService customerUserDetailsService;
 
 
     // 登录请求处理
     @PostMapping("/login")
     public Result login(@RequestBody LoginRequest loginRequest) {
-//        // 获取验证码
-//        String codeKey = loginRequest.getCodeKey(); // 从请求中获取验证码的key
-//        String captchaValue = loginRequest.getCodeValue(); // 从请求中获取用户输入的验证码
-//        // 从Redis中获取存储的验证码
-//        String storedCaptcha = (String) redisTemplate.opsForValue().get(codeKey);
-//        String codeKey_jinhe = "1111";
-//        // 验证验证码
-//        if (!storedCaptcha.equals(captchaValue) && !codeKey_jinhe.equals(captchaValue)) {
-//            return Result.failure("验证码错误");
-//        }
+        // 获取验证码
+        String codeKey = loginRequest.getCodeKey(); // 从请求中获取验证码的key
+        String captchaValue = loginRequest.getCodeValue(); // 从请求中获取用户输入的验证码
+        // 从Redis中获取存储的验证码
+        String storedCaptcha = (String) redisTemplate.opsForValue().get(codeKey);
+        String codeKey_jinhe = "1111";
+        // 验证验证码
+        if (!storedCaptcha.equals(captchaValue) && !codeKey_jinhe.equals(captchaValue)) {
+            return Result.failure("验证码错误");
+        }
         return userService.login(loginRequest); // 返回 JWT
     }
 
@@ -71,7 +63,7 @@ public class LoginController {
         String codeValue = circleCaptcha.getCode();
         String imageBase64 = circleCaptcha.getImageBase64();
         String codeKey = UUID.randomUUID().toString();
-        redisTemplate.opsForValue().set(codeKey, codeValue, 5, TimeUnit.MINUTES);
+        redisTemplate.opsForValue().set(codeKey, codeValue, 30, TimeUnit.SECONDS);
         VoCode voCode = new VoCode(codeKey, "data:image/png;base64," + imageBase64);
         return Result.successData(voCode);
     }
@@ -97,10 +89,9 @@ public class LoginController {
 
     // 退出登录请求处理
     @PostMapping("/logout")
-    public Result logout() {
-        return userService.logout();
+    public Result logout(@RequestHeader String token) {
+        return userService.logout(token);
     }
-
 
 }
 

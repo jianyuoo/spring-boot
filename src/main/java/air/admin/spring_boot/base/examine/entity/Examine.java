@@ -1,7 +1,9 @@
 package air.admin.spring_boot.base.examine.entity;
 
 import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import jakarta.persistence.Id;
 import lombok.Data;
 
 import java.time.LocalDateTime;
@@ -12,7 +14,7 @@ import java.time.LocalDateTime;
 @TableName(value = "mzgl_examine")
 public class Examine {
 
-    @TableField(value = "examine_id")
+    @TableId
     private Long examineid;
 
     @TableField(value = "examineitem")

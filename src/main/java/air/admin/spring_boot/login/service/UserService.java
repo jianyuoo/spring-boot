@@ -69,33 +69,9 @@ public class UserService extends ServiceImpl<loginmapper, User> {
         return Result.success(map);
     }
 
-    public Result logout() {
-
-        Authentication authentication = SecurityContextHolder
-                .getContext()
-                .getAuthentication();
-        // 检查是否有认证信息
-        if (authentication == null || !authentication.isAuthenticated() || authentication.getPrincipal() == null) {
-            return Result.fail("当前用户未登录或登录已过期，退出登录失败");
-        }
-
-        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-
-        if (principal instanceof MyUserDetails) {
-            String username = ((MyUserDetails) principal).getUsername();
-        } else {
-            String username = principal.toString();
-        }
-
-        MyUserDetails loginUser = (MyUserDetails) principal;
-        String userId = loginUser.getUsername();
-
-        // 清除用户认证信息
-        SecurityContextHolder.clearContext();
-
+    public Result logout(String token) {
         // 从 Redis 中删除用户信息
-        redisTemplate.delete("login:" + userId);
-
+        redisTemplate.delete("login:" + token);
         return Result.success("退出登录成功");
     }
 
