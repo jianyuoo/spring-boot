@@ -14,5 +14,5 @@ public interface loginmapper extends UserDetails, BaseMapper<User>{
     MyUserDetails loadUserByUsername(String username) throws UsernameNotFoundException;
 
     @Select("SELECT * FROM mzgl_user WHERE username = #{username}")
-    String findUsernameByUsername(String username); // 返回查询的用户名
+    User findUsernameByUsername(String username); // 返回查询的用户名
 }

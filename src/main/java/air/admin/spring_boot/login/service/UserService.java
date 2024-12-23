@@ -1,14 +1,24 @@
 package air.admin.spring_boot.login.service;
 
-import air.admin.spring_boot.base.doctor.dto.DoctorSaveDto;
+import air.admin.spring_boot.common.Security.config.JwtTokenProvider;
+import air.admin.spring_boot.common.Security.service.CustomerUserDetailsService;
+import air.admin.spring_boot.login.dto.LoginRequest;
+import air.admin.spring_boot.login.entity.MyUserDetails;
 import air.admin.spring_boot.login.entity.User;
 import air.admin.spring_boot.login.mapper.loginmapper;
+import air.admin.spring_boot.util.Result;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import org.apache.ibatis.annotations.Select;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+
+import java.util.HashMap;
+import java.util.Objects;
+import java.util.concurrent.TimeUnit;
 
 @Service
 public class UserService extends ServiceImpl<loginmapper, User> {
@@ -16,15 +26,77 @@ public class UserService extends ServiceImpl<loginmapper, User> {
     @Autowired
     private loginmapper loginmapper;
 
+    /**
+     * 获取认证入口
+     */
+    @Autowired
+    private AuthenticationManager authenticationManager;
+
+    @Autowired
+    private JwtTokenProvider jwtTokenProvider;
+
+    @Autowired
+    private RedisTemplate<String, Object> redisTemplate;
+
+    @Autowired
+    CustomerUserDetailsService customerUserDetailsService;
 
 
     public boolean existsByUsername(String username) {
-        String user = loginmapper.findUsernameByUsername(username); // 查询用户名
+        User user = loginmapper.findUsernameByUsername(username); // 查询用户名
         return user != null; // 如果 user 不为 null，则用户名已存在
     }
 
     public void inster(User newUser) {
         loginmapper.insert(newUser);
+    }
+
+    public Result login(@NotNull LoginRequest loginRequest) {
+        // 通过AuthenticationManager的authenticate方法来进行用户认证
+        MyUserDetails authenticate = loginmapper.loadUserByUsername(loginRequest.getUsername());
+        // 判断是否验证成功
+        if (Objects.isNull(authenticate)) {
+            throw new RuntimeException("用户名或密码错误");
+        }
+        // 使用userid生成token
+        String username = authenticate.getUsername();
+        String jwt = jwtTokenProvider.generateToken(username);
+        // userId用作key，将用户信息存入redis，并设置30分钟过期
+        redisTemplate.opsForValue().set("login:" + jwt, authenticate, 30, TimeUnit.MINUTES);
+        // 把token响应给前端
+        HashMap<String, String> map = new HashMap<>();
+        map.put("token", jwt);
+        return Result.success(map);
+    }
+
+    public Result logout() {
+
+        Authentication authentication = SecurityContextHolder
+                .getContext()
+                .getAuthentication();
+        // 检查是否有认证信息
+        if (authentication == null || !authentication.isAuthenticated() || authentication.getPrincipal() == null) {
+            return Result.fail("当前用户未登录或登录已过期，退出登录失败");
+        }
+
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        if (principal instanceof MyUserDetails) {
+            String username = ((MyUserDetails) principal).getUsername();
+        } else {
+            String username = principal.toString();
+        }
+
+        MyUserDetails loginUser = (MyUserDetails) principal;
+        String userId = loginUser.getUsername();
+
+        // 清除用户认证信息
+        SecurityContextHolder.clearContext();
+
+        // 从 Redis 中删除用户信息
+        redisTemplate.delete("login:" + userId);
+
+        return Result.success("退出登录成功");
     }
 
 
