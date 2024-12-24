@@ -47,7 +47,7 @@ public class LoginController {
         String codeKey = loginRequest.getCodeKey(); // 从请求中获取验证码的key
         String captchaValue = loginRequest.getCodeValue(); // 从请求中获取用户输入的验证码
         // 从Redis中获取存储的验证码
-        String storedCaptcha = (String) redisTemplate.opsForValue().get(codeKey);
+        String storedCaptcha = redisTemplate.opsForValue().get(codeKey);
         String codeKey_jinhe = "1111";
         // 验证验证码
         if (!storedCaptcha.equals(captchaValue) && !codeKey_jinhe.equals(captchaValue)) {

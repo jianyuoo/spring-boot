@@ -7,13 +7,13 @@ import java.time.LocalDateTime;
 @Data
 public class CasesSaveDto {
     /*
-          病例id
-         */
+    *  病例id
+    */
     private Long caseid;
     /*
      *  病例名称
      * */
-    private String name;
+    private String diseasename;
     /*
      *  患者id
      * */
@@ -30,10 +30,6 @@ public class CasesSaveDto {
      *  病例建立时间
      * */
     private LocalDateTime casecreatetime;
-    /*
-     *  病例修改时间
-     * */
-    private LocalDateTime caseupdatetime;
     /*
      *  病例数据
      * */

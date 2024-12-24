@@ -1,10 +1,13 @@
 package air.admin.spring_boot.base.cases.dto;
 
-import java.time.LocalDateTime;
+import lombok.Data;
 
+
+
+@Data
 public class CasesQueryDto {
     /*
-      病例id
+     *  病例id
      */
     private Long caseid;
 

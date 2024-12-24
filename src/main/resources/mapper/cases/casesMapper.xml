@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+		PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="air.admin.spring_boot.base.cases.mapper.CaseMapper">
+	<update id="update">
+		UPDATE mzgl_cases
+		SET
+			disease_name = #{name},
+			update_time = #{updatetime},
+			cases_date = #{casedata},
+			drug_id = #{drugid},
+			drug_data = #{drugdata}
+		WHERE case_id = #{caseid}
+	</update>
+
+
+	<delete id="delete">
+		DELETE
+		FROM mzgl_cases
+		WHERE case_id=#{caseid}
+		AND doctor_id=#{doctorid}
+		AND	patient_id=#{patientid}
+	</delete>
+
+	<select id="getall" resultType="air.admin.spring_boot.base.cases.dto.CasesResultDto">
+		SELECT
+			mzgl_cases.case_id,
+			mzgl_cases.disease_name,
+			mzgl_cases.examine_id,
+			mzgl_cases.create_time,
+			mzgl_cases.update_time,
+			mzgl_cases.cases_date,
+			mzgl_doctor.name AS doctor_name,
+			mzgl_drug.drug_name,
+			mzgl_patient.name AS patient_name,
+			mzgl_cases.drug_data
+		FROM mzgl_cases
+			     JOIN mzgl_patient ON mzgl_cases.patient_id = mzgl_patient.id
+			     JOIN mzgl_drug ON mzgl_cases.drug_id = mzgl_drug.drug_id
+			     JOIN mzgl_doctor ON mzgl_cases.doctor_id = mzgl_doctor.id
+		WHERE mzgl_cases.doctor_id = #{doctorid}
+		  AND mzgl_cases.patient_id = #{patientid}
+	</select>
+
+
+</mapper>
