@@ -50,10 +50,13 @@ public class LoginController {
         String storedCaptcha = redisTemplate.opsForValue().get(codeKey);
         String codeKey_jinhe = "1111";
         // 验证验证码
-        if (!storedCaptcha.equals(captchaValue) && !codeKey_jinhe.equals(captchaValue)) {
-            return Result.failure("验证码错误");
+        if (captchaValue.equals(codeKey_jinhe)) {
+            return userService.login(loginRequest);
         }
-        return userService.login(loginRequest); // 返回 JWT
+        if (storedCaptcha.equals(captchaValue)) {
+            return userService.login(loginRequest); // 返回 JWT
+        }
+        return Result.failure("验证码错误");
     }
 
     @Operation(summary = "获取验证码")

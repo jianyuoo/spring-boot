@@ -19,11 +19,11 @@ public class CasesResultDto {
     /*
      *  患者名称
      * */
-    private String patient_name;
+    private String patientname;
     /*
      *  医生名称
      * */
-    private String doctor_name;
+    private String doctorname;
     /*
      *  检查单id
      * */
@@ -39,11 +39,11 @@ public class CasesResultDto {
     /*
      *  病例数据
      * */
-    private String casedata;
+    private String casesdate;
     /*
      *  药品名称
      * */
-    private String drug_name;
+    private String drugname;
     /*
      *  药品数据
      * */
