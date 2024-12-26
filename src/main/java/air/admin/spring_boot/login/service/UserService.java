@@ -15,6 +15,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestHeader;
 
 import java.util.HashMap;
 import java.util.Objects;
@@ -64,16 +65,24 @@ public class UserService extends ServiceImpl<loginmapper, User> {
         // userId用作key，将用户信息存入redis，并设置30分钟过期
         redisTemplate.opsForValue().set("login:" + jwt, authenticate, 30, TimeUnit.MINUTES);
         // 把token响应给前端
-        HashMap<String, String> map = new HashMap<>();
-        map.put("token", jwt);
-        return Result.success(map);
+        return Result.success(jwt);
     }
 
     public Result logout(String token) {
-        // 从 Redis 中删除用户信息
-        redisTemplate.delete("login:" + token);
-        return Result.success("退出登录成功");
+        // 从Redis中删除登录信息
+        try {
+            Boolean isDeleted = redisTemplate.delete("login:" + token);
+            if (isDeleted != null && isDeleted) {
+                return Result.success("成功登出");
+            } else {
+                return Result.failure("登出失败或用户未登录");
+            }
+        } catch (Exception e) {
+            // 处理异常
+            return Result.failure("出现异常: " + e.getMessage());
+        }
     }
+
 
 
 }

@@ -17,10 +17,10 @@ public class Doctor{
     @TableField(value = "username")
     private String username;
 
-    @TableField(value = "age")
+    @TableField(value = "doctor_age")
     private String age;
 
-    @TableField(value = "sex")
+    @TableField(value = "doctor_sex")
     private String sex;
 
     @TableField(value = "department_id")

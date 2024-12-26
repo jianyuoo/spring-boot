@@ -91,7 +91,7 @@ public class LoginController {
     }
 
     // 退出登录请求处理
-    @PostMapping("/logout")
+    @GetMapping("/logout")
     public Result logout(@RequestHeader String token) {
         return userService.logout(token);
     }

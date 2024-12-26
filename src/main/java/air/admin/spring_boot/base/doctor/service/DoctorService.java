@@ -8,6 +8,7 @@ import air.admin.spring_boot.base.doctor.mapper.DoctorMapper;
 import air.admin.spring_boot.login.entity.User;
 import air.admin.spring_boot.login.service.UserService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import jakarta.annotation.Resource;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,13 +18,13 @@ import org.springframework.stereotype.Service;
 @Service
 public class DoctorService extends ServiceImpl<DoctorMapper, Doctor> {
 
-    @Autowired
+    @Resource
     private DoctorMapper doctorMapper;
 
-    @Autowired
+    @Resource
     private PasswordEncoder passwordEncoder;
 
-    @Autowired
+    @Resource
     private UserService userService;
 
     public DoctorResultDto select(DoctorQueryDto dto) {

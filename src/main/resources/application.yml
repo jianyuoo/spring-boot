@@ -1,5 +1,6 @@
 server:
   port: 8081
+  address: 0.0.0.0 # 允许局域网访问
 spring:
   datasource:
     url: jdbc:postgresql://192.168.2.175/mzgl?currentSchema=public
