@@ -9,6 +9,7 @@ import air.admin.spring_boot.login.vo.VoCode;
 import air.admin.spring_boot.common.Security.config.JwtTokenProvider;
 import air.admin.spring_boot.common.Security.service.CustomerUserDetailsService;
 import cn.hutool.core.lang.UUID;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import cn.hutool.captcha.CaptchaUtil;
@@ -51,10 +52,11 @@ public class LoginController {
         String codeKey_jinhe = "1111";
         // 验证验证码
         if (captchaValue.equals(codeKey_jinhe)) {
+
             return userService.login(loginRequest);
         }
         if (storedCaptcha.equals(captchaValue)) {
-            return userService.login(loginRequest); // 返回 JWT
+            return userService.login(loginRequest);
         }
         return Result.failure("验证码错误");
     }
@@ -83,7 +85,7 @@ public class LoginController {
         newUser.setUsername(registerRequest.getUsername());
         newUser.setId(registerRequest.getId());
         newUser.setPassword(passwordEncoder.encode(registerRequest.getPassword())); // 密码加密
-
+        newUser.setStatu("患者");
         // 保存用户到数据库
         userService.inster(newUser);
 
@@ -91,8 +93,9 @@ public class LoginController {
     }
 
     // 退出登录请求处理
-    @GetMapping("/logout")
+    @PostMapping("/logout")
     public Result logout(@RequestHeader String token) {
+
         return userService.logout(token);
     }
 

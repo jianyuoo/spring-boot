@@ -13,41 +13,39 @@ import java.time.LocalDateTime;
 public class PatientEntity implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    /**
+    /*
      * patient_id
      */
-    @TableField(value = "id")
+    @TableId
     private Long id;
 
-    /**
+    /*
      * name
      */
     @TableField(value = "name")
     private String name;
 
+    //病例id
+    @TableField(value = "cases_id")
+    private Long casesid;
+
 
     @TableField(value = "username")
     private String username;
 
-    /**
+    /*
      * age
      */
     @TableField(value = "age")
     private String age;
 
-    /**
+    /*
      * sex
      */
     @TableField(value = "sex")
     private String sex;
 
-    /**
-     * cases_id
-     */
-    @TableField(value = "cases_id")
-    private String casesId;
-
-    /**
+    /*
      * hospitalized_status
      */
     @TableField(value = "hospitalized_status")

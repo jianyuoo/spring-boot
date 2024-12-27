@@ -48,6 +48,7 @@ public class DoctorService extends ServiceImpl<DoctorMapper, Doctor> {
         user.setId(dto.getId());
         user.setUsername(dto.getUsername());
         user.setPassword(Password(dto.getId()));
+        user.setStatu("医生");
         userService.save(user);
         return save(doctor);
     }

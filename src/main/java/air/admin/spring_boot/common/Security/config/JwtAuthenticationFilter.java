@@ -2,6 +2,10 @@ package air.admin.spring_boot.common.Security.config;
 
 import air.admin.spring_boot.common.Security.service.CustomerUserDetailsService;
 import air.admin.spring_boot.login.entity.MyUserDetails;
+import air.admin.spring_boot.login.entity.User;
+import air.admin.spring_boot.login.mapper.Loginmapper;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import jakarta.annotation.Resource;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -25,6 +29,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     private final JwtTokenProvider jwtTokenProvider; // JWT 处理类
 
     private final RedisTemplate<String, Object> redisTemplate;
+    @Resource
+    private Loginmapper loginmapper;
 
     @Autowired
     public JwtAuthenticationFilter(JwtTokenProvider jwtTokenProvider, CustomerUserDetailsService customerUserDetailsService, RedisTemplate<String, Object> redisTemplate) {
@@ -43,10 +49,12 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         if (token != null && jwtTokenProvider.validateToken(token)) {
 
             String username = jwtTokenProvider.getUsernameFromToken(token); // 从 token 中获取用户名
+            User user = loginmapper.selectOne(new LambdaQueryWrapper<User>()
+                    .eq(User::getUsername, username));
             // 如果用户名不为空且还没有认证
             if (username != null) {
                 // 从redis加载用户详情
-                MyUserDetails myUserDetails = (MyUserDetails)redisTemplate.opsForValue().get("login:"+token);
+                MyUserDetails myUserDetails = (MyUserDetails)redisTemplate.opsForValue().get(user.getStatu() +":"+token);
                 // 创建认证信息并设置到上下文中
                 UsernamePasswordAuthenticationToken authentication =
                         new UsernamePasswordAuthenticationToken(myUserDetails, null,
@@ -59,11 +67,9 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     }
 
     @Nullable
-    private String resolveToken(@NotNull HttpServletRequest request) {
+    public String resolveToken(@NotNull HttpServletRequest request) {
         String bearerToken = request.getHeader("token");
         return bearerToken;
     }
-
-
 }
 

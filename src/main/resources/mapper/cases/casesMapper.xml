@@ -3,6 +3,10 @@
 		PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="air.admin.spring_boot.base.cases.mapper.CaseMapper">
+	<insert id="save">
+		insert into mzgl_cases (patient_id, doctor_id)
+		values (#{patientid},#{doctorid})
+	</insert>
 	<update id="update">
 		UPDATE mzgl_cases
 		SET
@@ -11,21 +15,21 @@
 			cases_date = #{casedata},
 			drug_id = #{drugid},
 			drug_data = #{drugdata}
-		WHERE case_id = #{caseid}
+		WHERE cases_id = #{caseid}
 	</update>
 
 
 	<delete id="delete">
 		DELETE
 		FROM mzgl_cases
-		WHERE case_id=#{caseid}
+		WHERE cases_id=#{caseid}
 		AND doctor_id=#{doctorid}
 		AND	patient_id=#{patientid}
 	</delete>
 
 	<select id="getall" resultType="air.admin.spring_boot.base.cases.dto.CasesResultDto">
 		SELECT
-			mzgl_cases.case_id,
+			mzgl_cases.cases_id,
 			mzgl_cases.disease_name,
 			mzgl_cases.examine_id,
 			mzgl_cases.create_time,
@@ -42,6 +46,7 @@
 		WHERE mzgl_cases.doctor_id = #{doctorid}
 		  AND mzgl_cases.patient_id = #{patientid}
 	</select>
+
 
 
 </mapper>

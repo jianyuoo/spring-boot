@@ -1,11 +1,11 @@
 package air.admin.spring_boot.common.config;
 
 
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.core.Ordered;
 import org.springframework.web.cors.CorsConfiguration;
@@ -24,6 +24,13 @@ public class WebConfig implements WebMvcConfigurer {
                 .allowCredentials(true) // 允许携带用户凭证（如 cookie）
                 .maxAge(3600) ;// 预检请求的最大有效期（秒）
     }
+
+//    @Override
+//    public void addInterceptors(InterceptorRegistry registry) {
+//        registry.addInterceptor(new Interceptor())
+//                .addPathPatterns("/**") // 拦截所有路径
+//                .excludePathPatterns("/v1/**"); // 排除登录和注册等不需要验证的路径
+//    }
 
 
     @Bean

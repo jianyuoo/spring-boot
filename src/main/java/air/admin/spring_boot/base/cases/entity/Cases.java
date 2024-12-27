@@ -1,9 +1,11 @@
 package air.admin.spring_boot.base.cases.entity;
 
 import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import jakarta.persistence.Id;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 /*
@@ -11,12 +13,13 @@ import java.time.LocalDateTime;
  * */
 @Data
 @TableName(value = "mzgl_cases")
+@AllArgsConstructor
+@NoArgsConstructor
 public class Cases {
     /*
      *  病例id
      * */
-    @Id
-    @TableField(value = "case_id")
+    @TableId
     private Long caseid;
     /*
      *  病例名称

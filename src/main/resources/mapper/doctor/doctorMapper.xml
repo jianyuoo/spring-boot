@@ -10,5 +10,15 @@
         JOIN mzgl_user ON mzgl_doctor.id = mzgl_user.id
         WHERE mzgl_doctor.id = #{id};
     </select>
+    <select id="selectDoctor"
+            resultType="air.admin.spring_boot.base.department.dto.DepartmentResultDto">
+        SELECT name, id
+        FROM mzgl_doctor
+        WHERE mzgl_doctor.department_id = (
+            SELECT department_id
+            FROM mzgl_department
+            WHERE department = #{departmentName})
+    </select>
+
 
 </mapper>

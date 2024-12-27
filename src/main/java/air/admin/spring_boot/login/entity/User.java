@@ -29,6 +29,7 @@ public class User {
     private Long id; //主键ID
     private String username; //账号
     private String password; //密码
+    private String statu;  //身份
 
 
 }

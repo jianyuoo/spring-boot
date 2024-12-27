@@ -8,4 +8,7 @@ public class DoctorQueryDto {
 
     @TableField(value = "id")
     private Long id;
+
+    @TableField(value = "department_id")
+    private Long departmentid;
 }

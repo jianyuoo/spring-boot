@@ -17,8 +17,8 @@ public class CasesController {
     private CasesService casesService;
 
     @PostMapping("/add")
-    public Result add(@RequestBody Cases cases) {
-        return casesService.add(cases);
+    public Result add(@RequestBody Cases dto) {
+        return casesService.add(dto);
     }
 
     @GetMapping("/delete")

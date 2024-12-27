@@ -1,6 +1,7 @@
 package air.admin.spring_boot.base.doctor.entity;
 
 import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
@@ -8,7 +9,7 @@ import lombok.Data;
 @TableName(value = "mzgl_doctor")
 public class Doctor{
 
-    @TableField(value = "id")
+    @TableId
     private Long  id;
 
     @TableField(value = "name")

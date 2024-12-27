@@ -9,7 +9,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 @Mapper
-public interface loginmapper extends UserDetails, BaseMapper<User>{
+public interface Loginmapper extends UserDetails, BaseMapper<User>{
 
     MyUserDetails loadUserByUsername(String username) throws UsernameNotFoundException;
 

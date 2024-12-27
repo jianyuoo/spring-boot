@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="air.admin.spring_boot.login.mapper.loginmapper">
+<mapper namespace="air.admin.spring_boot.login.mapper.Loginmapper">
 
     <select id="loadUserByUsername" resultType="air.admin.spring_boot.login.entity.MyUserDetails">
         SELECT

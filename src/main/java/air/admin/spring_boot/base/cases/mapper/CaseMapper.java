@@ -2,9 +2,9 @@ package air.admin.spring_boot.base.cases.mapper;
 
 import air.admin.spring_boot.base.cases.dto.CasesQueryDto;
 import air.admin.spring_boot.base.cases.dto.CasesResultDto;
-import air.admin.spring_boot.base.cases.dto.CasesSaveDto;
 import air.admin.spring_boot.base.cases.dto.CasesupdateDto;
 import air.admin.spring_boot.base.cases.entity.Cases;
+import air.admin.spring_boot.base.patient.entity.PatientEntity;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 

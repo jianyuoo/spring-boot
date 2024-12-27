@@ -11,7 +11,7 @@ public class Drug {
     /**
      *  药品id
      * */
-    @TableId(value = "drug_id")
+    @TableId
     private Integer drugid;
 
     /**
