@@ -32,15 +32,15 @@ public class NurseController {
     @PostMapping("/select")
     public Result select (@Valid @RequestBody NurseQueryDto dto) {
         try {
-            NurseResultDto nurse = nurseService.getAllNurse(dto); // 假设这里返回的是单个药品 DTO
+            NurseResultDto nurse = nurseService.getAllNurse(dto);
 
             if (nurse != null) {
-                return Result.success(nurse); // 返回查询到的药品对象
+                return Result.success(nurse);
             } else {
-                return Result.failure("未找到患者信息");
+                return Result.failure("未找到护士信息");
             }
         } catch (Exception e) {
-            return Result.failure("获取患者信息出错: " + e.getMessage());
+            return Result.failure("获取护士信息出错: " + e.getMessage());
         }
 
 
